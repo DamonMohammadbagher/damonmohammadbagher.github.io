@@ -4,7 +4,7 @@ body { background-image: url("x3.jpeg"); }
 p{margin:0 10px 10px}
 a{padding:5px; text-decoration:none; color:#000000;}
 div#header{background-color:#F3F2ED;}
-div#header h1{height:40px;line-height:40px;margin:0;padding-left:6px;}
+div#header h1{height:40px;line-height:40px;margin:0;padding-left:6px; opacity: 0.5;}
 div#container{text-align:left}
 div#content p{line-height:1.4}
 div#navigation{background:#F6F0E0;}
