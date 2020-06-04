@@ -6,13 +6,14 @@ a:link {
   color:#FFA500;
   background-color: transparent;
   text-decoration: none;
+  padding:5px;
 }
 a:hover {
   color:#FF8C00;
   background-color: transparent;
   text-decoration: underline;
+  padding:5px;
 }
-a{padding:5px; text-decoration:none; color:#FF8C00;}
 div#header{background-color:#F3F2ED; opacity: 0.7;}
 div#header h1{height:40px;line-height:40px;margin:3;padding-left:9px; opacity: 0.8;}
 div#container{text-align:left}
