@@ -2,7 +2,7 @@ html,body{margin:0;padding:0}
 body{font: 76% arial,sans-serif;text-align:left}
 body { background-image: url("x3.jpeg"); }
 p{margin:0 10px 10px}
-a{padding:5px; text-decoration:none; color:#000000;}
+a{padding:5px; text-decoration:none; color:#FF8C00;}
 div#header{background-color:#F3F2ED; opacity: 0.7;}
 div#header h1{height:40px;line-height:40px;margin:3;padding-left:9px; opacity: 0.8;}
 div#container{text-align:left}
