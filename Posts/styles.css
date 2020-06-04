@@ -5,7 +5,7 @@ p{margin:0 10px 10px}
 a:link {  color:#FF8C00;  background-color: transparent;  text-decoration: none;  padding:5px;}
 a:hover {  color:#FFA500;  background-color: transparent;  text-decoration: underline;  padding:5px;}
 div#header{background-color:#F3F2ED; opacity: 0.7;}
-div#header h1{height:40px;line-height:40px;margin:3;padding-left:9px; opacity: 0.8;}
+div#header h1{height:15px;line-height:15px;margin:3;padding-left:9px; opacity: 0.8;}
 div#container{text-align:left}
 div#content p{line-height:1.4}
 div#navigation{background:#F6F0E0;}
