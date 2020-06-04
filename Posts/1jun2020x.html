@@ -106,10 +106,6 @@ Point about ESET and other <span >Avs</span>.</p>
 I used shell command then payload in Notepad.exe (in-Memory) detected by ESET
 very good.</p>
 
-<p ><o:p>&nbsp;</o:p></p>
-
-<p ><o:p>&nbsp;</o:p></p>
-
 <p ><span style='mso-fareast-language:EN-US;mso-bidi-language:
 FA;mso-no-proof:yes'><![if !vml]><img border=0 width=1304 height=465
 src="1jun2020x_files/image006.jpg"
@@ -117,8 +113,6 @@ src="1jun2020x_files/image006.jpg"
 
 <p >Picture 3: Shell code detected by <span >ESET<span
 style='mso-spacerun:yes'>  </span>(</span>last update: 5/29/2020)</p>
-
-<p ><o:p>&nbsp;</o:p></p>
 
 <p ><o:p>&nbsp;</o:p></p>
 
@@ -159,7 +153,6 @@ should try to find out how this Notepad process Infected in-memory?) <o:p></o:p>
 <p ><b>ETW &amp; Remote Thread Injection Method<o:p></o:p></b></p>
 
 <p ><o:p>&nbsp;</o:p></p>
-
 <p ><span >in</span> this case (Event Trace for
 Windows) ETW can help us to find out which Processes was Injector for that
 Thread/s into "Notepad.exe", </p>
@@ -168,16 +161,10 @@ Thread/s into "Notepad.exe", </p>
 >ETWMonThread.cs</span>" you can Detect all Injected Threads to
 Processes very simple. </p>
 <p ><o:p>&nbsp;</o:p></p>
-<p ><o:p>&nbsp;</o:p></p>
-
-
 <p ><span>ETWMonThread.cs: </span> 
 <a href="https://github.com/DamonMohammadbagher/Meterpreter_Payload_Detection/tree/master/MPD/ETWMonThread/">
 <span>https://github.com/DamonMohammadbagher/Meterpreter_Payload_Detection/tree/master/MPD/ETWMonThread/</span></a></p>
-
 <p ><o:p>&nbsp;</o:p></p>
-<p ><o:p>&nbsp;</o:p></p>
-
 <p >With this ETW code you can find all injected Threads by
 Thread Monitoring (real-time) also with this code you can Terminate/stop that
 Thread which was for <span >Meterpreter</span> Process and finally
@@ -195,15 +182,10 @@ src="1jun2020x_files/image010.jpg"
 ><span style='mso-spacerun:yes'>  </span>(</span>TID:900 Injected to
 PID:4108 by Malware Process PID:4632)</p>
 <p ><o:p>&nbsp;</o:p></p>
-<p ><o:p>&nbsp;</o:p></p>
 <p ><span>Video ETWMonThread.cs [step by step]: </span>
 <a href="https://www.youtube.com/watch?v=nIoDrqeQ2es">
 <span>https://www.youtube.com/watch?v=nIoDrqeQ2es</span></a></p>
- 
-
- 
-<p ><o:p>&nbsp;</o:p></p>
-<p ><o:p>&nbsp;</o:p></p>	
+ <p ><o:p>&nbsp;</o:p></p>
 <p ><span >as</span> you can see this ETW is very
 useful thing for Thread Monitoring also is useful to show Injected Threads also
 Injector Processes... (Sometimes) and I think Some Anti-viruses need to use this
