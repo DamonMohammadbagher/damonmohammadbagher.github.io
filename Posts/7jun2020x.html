@@ -1,0 +1,443 @@
+﻿<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40"
+xmlns:ns0="http://schemas.microsoft.com/office/2004/12/omml">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=utf-8">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 11">
+<meta name=Originator content="Microsoft Word 11">
+<link rel=File-List href="7jun2020x_files/filelist.xml">
+<link rel=Edit-Time-Data href="7jun2020x_files/editdata.mso">
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style>
+<![endif]-->
+<title>Detecting Thread Injection by ETW & One Simple Technique (Chunking codes to two parts</title>
+<!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:Zoom>90</w:Zoom>
+  <w:SpellingState>Clean</w:SpellingState>
+  <w:GrammarState>Clean</w:GrammarState>
+  <w:ValidateAgainstSchemas/>
+  <w:SaveIfXMLInvalid>false</w:SaveIfXMLInvalid>
+  <w:IgnoreMixedContent>false</w:IgnoreMixedContent>
+  <w:AlwaysShowPlaceholderText>false</w:AlwaysShowPlaceholderText>
+  <w:BrowserLevel>MicrosoftInternetExplorer4</w:BrowserLevel>
+ </w:WordDocument>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:LatentStyles DefLockedState="false" LatentStyleCount="156">
+ </w:LatentStyles>
+</xml><![endif]-->
+<link rel=Stylesheet type="text/css" media=all href="1jun2020x_files/styles.css">
+<style>
+<!--
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+a:link, span.MsoHyperlink
+	{color:darkorange;
+	mso-text-animation:none;
+	text-decoration:none;
+	text-underline:none;
+	text-decoration:none;
+	text-line-through:none;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+p
+	{mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+span.SpellE
+	{mso-style-name:"";
+	mso-spl-e:yes;}
+span.GramE
+	{mso-style-name:"";
+	mso-gram-e:yes;}
+@page Section1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.25in 1.0in 1.25in;
+	mso-header-margin:.5in;
+	mso-footer-margin:.5in;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+-->
+</style>
+<!--[if gte mso 10]>
+<style>
+ /* Style Definitions */
+ table.MsoNormalTable
+	{mso-style-name:"Table Normal";
+	mso-tstyle-rowband-size:0;
+	mso-tstyle-colband-size:0;
+	mso-style-noshow:yes;
+	mso-style-parent:"";
+	mso-padding-alt:0in 5.4pt 0in 5.4pt;
+	mso-para-margin:0in;
+	mso-para-margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Times New Roman";
+	mso-ansi-language:#0400;
+	mso-fareast-language:#0400;
+	mso-bidi-language:#0400;}
+</style>
+<![endif]-->
+<link rel=themeData
+href="https://damonmohammadbagher.github.io/Posts/1jun2020x_files/themedata.thmx">
+<link rel=colorSchemeMapping
+href="https://damonmohammadbagher.github.io/Posts/1jun2020x_files/colorschememapping.xml">
+<!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="3074"/>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="1"/>
+ </o:shapelayout></xml><![endif]-->
+</head>
+
+<body bgcolor=white background="1jun2020x_files/x3.jpeg" lang=EN-US
+link=darkorange vlink=blue style='tab-interval:35.45pt'>
+
+<div class=Section1>
+
+<div>
+
+<div id=header>
+
+<p class=MsoNormal style='margin:2.25pt;line-height:30.0pt;mso-outline-level:
+2;background:#F3F2ED'><b><span style='font-size:4.5pt;font-family:Arial;
+mso-font-kerning:18.0pt'>Detecting Thread Injection by ETW & One Simple Technique (Chunking codes to two parts<o:p></o:p></span></b></p>
+
+</div>
+
+<p><b><span style='font-family:Arial'><o:p>&nbsp;</o:p></span></b></p>
+
+<p><b><span style='font-family:Arial'>Detecting Thread Injection by ETW &amp;
+One Simple Technique (Chunking codes to two parts)<span
+style='mso-spacerun:yes'>  </span><o:p></o:p></span></b></p>
+
+<p><span style='font-family:Arial'>In this Article I want to talk about ETW and
+Thread Injection in this case “Remote Thread Injection”.<o:p></o:p></span></p>
+
+<p><span style='font-family:Arial'>I made simple C# code “<span class=SpellE><b
+style='mso-bidi-font-weight:normal'>ETWMonThread.cs</b></span>” for <span
+class=SpellE>Meterpreter</span> Payload/Thread Injection Monitoring in 2018.<o:p></o:p></span></p>
+
+<p><span class=GramE><span style='font-family:Arial'>this</span></span><span
+style='font-family:Arial'> code was simple &amp; my goal was to Show how We can
+use ETW very simple and useful… <o:p></o:p></span></p>
+
+<p><span style='font-family:Arial'><o:p>&nbsp;</o:p></span></p>
+
+<p><span class=GramE><span style='font-family:Arial'>in</span></span><span
+style='font-family:Arial'> this code we have something like this :<o:p></o:p></span></p>
+
+<p><span style='font-family:Arial'><!--[if gte vml 1]><v:shapetype id="_x0000_t75"
+ coordsize="21600,21600" o:spt="75" o:preferrelative="t" path="m@4@5l@4@11@9@11@9@5xe"
+ filled="f" stroked="f">
+ <v:stroke joinstyle="miter"/>
+ <v:formulas>
+  <v:f eqn="if lineDrawn pixelLineWidth 0"/>
+  <v:f eqn="sum @0 1 0"/>
+  <v:f eqn="sum 0 0 @1"/>
+  <v:f eqn="prod @2 1 2"/>
+  <v:f eqn="prod @3 21600 pixelWidth"/>
+  <v:f eqn="prod @3 21600 pixelHeight"/>
+  <v:f eqn="sum @0 0 1"/>
+  <v:f eqn="prod @6 1 2"/>
+  <v:f eqn="prod @7 21600 pixelWidth"/>
+  <v:f eqn="sum @8 21600 0"/>
+  <v:f eqn="prod @7 21600 pixelHeight"/>
+  <v:f eqn="sum @10 21600 0"/>
+ </v:formulas>
+ <v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/>
+ <o:lock v:ext="edit" aspectratio="t"/>
+</v:shapetype><v:shape id="_x0000_i1025" type="#_x0000_t75" style='width:444.75pt;
+ height:101.25pt'>
+ <v:imagedata src="7jun2020x_files/image003.png" o:title="csharp1"/>
+</v:shape><![endif]--><![if !vml]><img width=593 height=135
+src="7jun2020x_files/image004.jpg" v:shapes="_x0000_i1025"><![endif]><o:p></o:p></span></p>
+
+<p><span style='font-family:Arial'>Picture 1: <span class=SpellE>ETWEventsFilters</span>
+with ID 3.<o:p></o:p></span></p>
+
+<p><span style='font-family:Arial'>With This code you can have all New Created
+Thread IDs (<span class=SpellE>TIDs</span>) with ETW then you need to get only
+Injected Thread which means Thread Created by Process A into Process B so with
+this simple Code you can get this:<o:p></o:p></span></p>
+
+<p><span style='font-family:Arial'><!--[if gte vml 1]><v:shape id="_x0000_i1026"
+ type="#_x0000_t75" style='width:811.5pt;height:114.75pt'>
+ <v:imagedata src="7jun2020x_files/image005.png" o:title="csharp"/>
+</v:shape><![endif]--><![if !vml]><img width=1082 height=153
+src="7jun2020x_files/image006.jpg" v:shapes="_x0000_i1026"><![endif]><o:p></o:p></span></p>
+
+<p><span style='font-family:Arial'>Picture 2: Detecting Injector PID.<o:p></o:p></span></p>
+
+<p><span style='font-family:Arial'><o:p>&nbsp;</o:p></span></p>
+
+<p><span class=GramE><span style='font-family:Arial'>it</span></span><span
+style='font-family:Arial'> seams everything is ok &amp; I tested this code with
+some <b style='mso-bidi-font-weight:normal'>Technique</b> like these:<o:p></o:p></span></p>
+
+<p><b style='mso-bidi-font-weight:normal'><span style='font-family:Arial'>ETW
+test with Process Hollowing Technique:<o:p></o:p></span></b></p>
+
+<p><span style='font-family:Arial'>As you can see in this picture we have shell
+but this <span class=SpellE>Meterpreter</span> session and Thread ID Detected
+by ETW.<o:p></o:p></span></p>
+
+<p><span style='font-family:Arial'>Thread Injection Detected &amp; you can see
+Session Closed… … (<span class=GramE>click</span> on Picture for better resolution)
+<o:p></o:p></span></p>
+
+<p><span style='font-family:Arial'><a href="7jun2020x_files/HOLLOW-ETW.png"
+target="_blank"><span style='color:windowtext'><!--[if gte vml 1]><v:shape
+ id="_x0000_i1029" type="#_x0000_t75" style='width:908.25pt;height:274.5pt'>
+ <v:imagedata src="7jun2020x_files/image007.png" o:title="HOLLOW-ETW"/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=1211 height=366
+src="7jun2020x_files/image009.jpg" v:shapes="_x0000_i1029"><![endif]></span></a><o:p></o:p></span></p>
+
+<p><span style='font-family:Arial'>Picture 3: Process &amp; TID Detected by ETW
+(Process Hollowing Technique).<o:p></o:p></span></p>
+
+<p><b style='mso-bidi-font-weight:normal'><span style='font-family:Arial'><o:p>&nbsp;</o:p></span></b></p>
+
+<p><b style='mso-bidi-font-weight:normal'><span style='font-family:Arial'>ETW
+test with APC Queue Technique:<o:p></o:p></span></b></p>
+
+<p><span style='font-family:Arial'>Again you can see in this picture we have
+shell but this <span class=SpellE>Meterpreter</span> session and Thread ID Detected
+by <span class=GramE>ETW .</span><o:p></o:p></span></p>
+
+<p><span style='font-family:Arial'>Thread Injection Detected &amp; you can see
+Session Closed… (<span class=GramE>click</span> on Picture for better resolution)
+<o:p></o:p></span></p>
+
+<p><b style='mso-bidi-font-weight:normal'><span style='font-family:Arial'><a
+href="7jun2020x_files/APCQ-ETW.png" target="_blank"><span style='color:windowtext'><!--[if gte vml 1]><v:shape
+ id="_x0000_i1028" type="#_x0000_t75" style='width:909pt;height:301.5pt'>
+ <v:imagedata src="7jun2020x_files/image010.png" o:title="APCQ-ETW"/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=1212 height=402
+src="7jun2020x_files/image012.jpg" v:shapes="_x0000_i1028"><![endif]></span></a><o:p></o:p></span></b></p>
+
+<p><span style='font-family:Arial'>Picture 4: Process &amp; TID Detected by ETW
+(APC-Q Technique).<o:p></o:p></span></p>
+
+<p><span style='font-family:Arial'><o:p>&nbsp;</o:p></span></p>
+
+<p><span style='font-family:Arial'>After these tests you can see this code “<span
+class=SpellE>ETWMonThread.cs</span>” was worked <span class=GramE>good</span>.<o:p></o:p></span></p>
+
+<p><span class=GramE><span style='font-family:Arial'>but</span></span><span
+style='font-family:Arial'> something in these Tests was same which is all of
+them have <span class=SpellE>OpenProcess</span>, <span class=SpellE>CreateRemoteThread</span>,
+<span class=SpellE>WriteProcessMemory</span> &amp; … in one code/exe <o:p></o:p></span></p>
+
+<p><span class=GramE><span style='font-family:Arial'>it</span></span><span
+style='font-family:Arial'> means <span class=SpellE>Malware</span>/Injector
+Code Will Detect at least with PID by ETW Events.<o:p></o:p></span></p>
+
+<p><span style='font-family:Arial'><o:p>&nbsp;</o:p></span></p>
+
+<p><b style='mso-bidi-font-weight:normal'><i style='mso-bidi-font-style:normal'><span
+style='font-family:Arial'>In the Picture 3 <span class=SpellE>Malware</span>/Injector
+Code PID was “Process Exited<span class=GramE>:1048</span>”.<o:p></o:p></span></i></b></p>
+
+<p><b style='mso-bidi-font-weight:normal'><i style='mso-bidi-font-style:normal'><span
+style='font-family:Arial'>In the Picture 4 <span class=SpellE>Malware</span>/Injector
+Code PID was “Process Exited<span class=GramE>:3964</span>”<o:p></o:p></span></i></b></p>
+
+<p><b style='mso-bidi-font-weight:normal'><i style='mso-bidi-font-style:normal'><span
+style='font-family:Arial'><o:p>&nbsp;</o:p></span></i></b></p>
+
+<p><b style='mso-bidi-font-weight:normal'><i style='mso-bidi-font-style:normal'><span
+style='font-family:Arial'>Chunking Codes:<o:p></o:p></span></i></b></p>
+
+<p><span style='font-family:Arial'>In this simple technique I want to use Thread
+Injection method with two Steps, it means I want to run this Injection
+Technique with two code/exe file.<o:p></o:p></span></p>
+
+<p><span style='font-family:Arial'>As you can see I made “NativePayload_TId2.exe”
+and this is Step1 of Thread Injection Method/Code.<o:p></o:p></span></p>
+
+<p><span style='font-family:Arial'>In this step1 we have (<span class=SpellE><b
+style='mso-bidi-font-weight:normal'>OpenProcess</b></span>, <span class=SpellE><b
+style='mso-bidi-font-weight:normal'>VirtualAllocEx</b></span>, <span
+class=SpellE><b style='mso-bidi-font-weight:normal'>WriteProcessMemory</b></span>)
+API functions only and don’t have <span class=SpellE><b style='mso-bidi-font-weight:
+normal'>CreateRemoteThread</b></span> Function.<o:p></o:p></span></p>
+
+<p><span style='font-family:Arial'><span style='mso-spacerun:yes'> </span>(<span
+class=GramE>click</span> on Picture for better resolution) <o:p></o:p></span></p>
+
+<p><b><span style='font-family:Arial'><a href="7jun2020x_files/1.png"
+target="_blank"><span style='color:windowtext'><!--[if gte vml 1]><v:shape
+ id="_x0000_i1027" type="#_x0000_t75" style='width:982.5pt;height:515.25pt'>
+ <v:imagedata src="7jun2020x_files/image001.png" o:title="1"/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=1310 height=687
+src="7jun2020x_files/image008.jpg" v:shapes="_x0000_i1027"><![endif]></span></a><o:p></o:p></span></b></p>
+
+<p><span style='font-family:Arial'>Picture 5: “NativePayload_TId2” Payload
+Injection into Target Process <span class=GramE>Without</span> <span
+class=SpellE><b style='mso-bidi-font-weight:normal'>CreateRemoteThread</b></span>.<o:p></o:p></span></p>
+
+<p><span style='font-family:Arial'><o:p>&nbsp;</o:p></span></p>
+
+<p><b style='mso-bidi-font-weight:normal'><span style='font-family:Arial'>Important
+<span class=GramE>Point :</span><o:p></o:p></span></b></p>
+
+<p><span style='font-family:Arial'>As you can see in the “Picture 5“, we “don’t
+have any Detection” for Payload Injection or Writing Payload via API Function <span
+class=SpellE><b style='mso-bidi-font-weight:normal'>WriteProcessMemory</b></span>
+into Target Process<o:p></o:p></span></p>
+
+<p><span style='font-family:Arial'>(Notepad.exe:3796) by ETW code because in
+this [step1] with “NativePayload_TId2.exe” we did not have <span class=SpellE><b
+style='mso-bidi-font-weight:normal'>CreateRemoteThread</b></span> Function.<o:p></o:p></span></p>
+
+<p><span style='font-family:Arial'>So with this “NativePayload_TId2.exe” we don’t
+have new Thread but Target Process Infected by This Code very Simple &amp; <span
+class=SpellE>Malware</span> Payload was injected to Notepad (In-memory).<o:p></o:p></span></p>
+
+<p><span style='font-family:Arial'><o:p>&nbsp;</o:p></span></p>
+
+<p><span style='font-family:Arial'>In the Next Picture you can see I used “NativePayload_TId3.exe”
+which is Part2 of Attack/Code. <o:p></o:p></span></p>
+
+<p><span style='font-family:Arial'>In this step2 of code Target Process in this
+case “Notepad” Opened with API function <span class=SpellE><b style='mso-bidi-font-weight:
+normal'>OpenProcess</b></span> &amp; Remote Thread created by “<span
+class=SpellE>Intptr</span> Pointer Address” from Step1<o:p></o:p></span></p>
+
+<p><span class=GramE><span style='font-family:Arial'>Which is in this case “002B0000”.</span></span><span
+style='font-family:Arial'> <o:p></o:p></span></p>
+
+<p><span style='font-family:Arial'><o:p>&nbsp;</o:p></span></p>
+
+<p><span style='font-family:Arial'>(<span class=GramE>click</span> on Picture
+for better resolution) <o:p></o:p></span></p>
+
+<p><span style='font-family:Arial'><a href="7jun2020x_files/2.png"
+target="_blank"><span style='color:windowtext'><!--[if gte vml 1]><v:shape
+ id="_x0000_i1030" type="#_x0000_t75" style='width:1023.75pt;height:5in'>
+ <v:imagedata src="7jun2020x_files/image002.png" o:title="2"/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=1365 height=480
+src="7jun2020x_files/image011.jpg" v:shapes="_x0000_i1030"><![endif]></span></a><o:p></o:p></span></p>
+
+<p><span style='font-family:Arial'>Picture 6: “NativePayload_TId3<span
+class=GramE>” <span style='mso-spacerun:yes'> </span>Creating</span> Remote Thread.<o:p></o:p></span></p>
+
+<p><span style='font-family:Arial'><o:p>&nbsp;</o:p></span></p>
+
+<p><span style='font-family:Arial'>Now in this Step2, Code Detected by ETW and you
+can see “NativePayload_TId3.exe” as Thread Injector Detected by ETW but this is
+Part2 of Code, <o:p></o:p></span></p>
+
+<p><span style='font-family:Arial'>This is not all of them.<o:p></o:p></span></p>
+
+<p><span style='font-family:Arial'>Part1 of code which was (<span class=SpellE><b
+style='mso-bidi-font-weight:normal'>OpenProcess</b></span>, <span class=SpellE><b
+style='mso-bidi-font-weight:normal'>VirtualAllocEx</b></span>, <span
+class=SpellE><span class=GramE><b style='mso-bidi-font-weight:normal'>WriteProcessMemory</b></span></span>)
+executed by “NativePayload_TId2.exe” and Not Detected by ETW code and still is undetectable
+for this C# ETW code.<o:p></o:p></span></p>
+
+<p><span style='font-family:Arial'>In the next “Picture 7” you can see this Session
+Detected/Closed.<o:p></o:p></span></p>
+
+<p><span style='font-family:Arial'>(<span class=GramE>click</span> on Picture
+for better resolution) <o:p></o:p></span></p>
+
+<p><span style='font-family:Arial'><a href="7jun2020x_files/3.png"
+target="_blank"><span style='color:windowtext'><!--[if gte vml 1]><v:shape
+ id="_x0000_i1031" type="#_x0000_t75" style='width:1006.5pt;height:5in'>
+ <v:imagedata src="7jun2020x_files/image013.png" o:title="3"/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=1342 height=480
+src="7jun2020x_files/image014.jpg" v:shapes="_x0000_i1031"><![endif]></span></a><span
+style='mso-spacerun:yes'> </span>Picture 7: “NativePayload_TId3<span
+class=GramE>” <span style='mso-spacerun:yes'> </span>Creating</span> Remote Thread.<o:p></o:p></span></p>
+
+<p><span style='font-family:Arial'><o:p>&nbsp;</o:p></span></p>
+
+<p><span style='font-family:Arial'>Another important thing is in this technique
+after [step1], your payload is in-memory of Notepad Process and you can <span
+class=GramE>Execute</span> that any time you want with/without delay<o:p></o:p></span></p>
+
+<p><span style='font-family:Arial'>And more than once so in the next Pictures
+you can see I used this Technique for Bypassing AVIRA Anti-viruses and these
+Codes [step1 &amp; step2] worked very well <o:p></o:p></span></p>
+
+<p><span class=GramE><span style='font-family:Arial'>but</span></span><span
+style='font-family:Arial'> in this case I Used [step2] two times and I had two
+session too, very simple. <o:p></o:p></span></p>
+
+<p><span style='font-family:Arial'><o:p>&nbsp;</o:p></span></p>
+
+<p><span style='font-family:Arial'><a href="7jun2020x_files/avira1.png"
+target="_blank"><span style='color:windowtext'><!--[if gte vml 1]><v:shape
+ id="_x0000_i1032" type="#_x0000_t75" style='width:1020pt;height:390pt'>
+ <v:imagedata src="7jun2020x_files/image015.png" o:title="avira1"/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=1360 height=520
+src="7jun2020x_files/image016.jpg" v:shapes="_x0000_i1032"><![endif]></span></a><o:p></o:p></span></p>
+
+<p><span class=GramE><span style='font-family:Arial'>Picture 8: this simple method
+not detected by AVIRA.</span></span><span style='font-family:Arial'><o:p></o:p></span></p>
+
+<p><span style='font-family:Arial'><o:p>&nbsp;</o:p></span></p>
+
+<p><span style='font-family:Arial'><a href="7jun2020x_files/avira2.png"
+target="_blank"><span style='color:windowtext'><!--[if gte vml 1]><v:shape
+ id="_x0000_i1033" type="#_x0000_t75" style='width:1027.5pt;height:393.75pt'>
+ <v:imagedata src="7jun2020x_files/image017.png" o:title="avira2"/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=1370 height=525
+src="7jun2020x_files/image018.jpg" v:shapes="_x0000_i1033"><![endif]></span></a><span
+style='mso-spacerun:yes'> </span><span class=GramE>Picture 9: this simple method
+not detected by AVIRA.</span><o:p></o:p></span></p>
+
+<p><span style='font-family:Arial'><o:p>&nbsp;</o:p></span></p>
+
+<p><span class=SpellE><span style='font-family:Arial'>ETWMonThread.cs</span></span><span
+style='font-family:Arial'>: <a
+href="https://github.com/DamonMohammadbagher/Meterpreter_Payload_Detection/tree/master/MPD/ETWMonThread/">https://github.com/DamonMohammadbagher/Meterpreter_Payload_Detection/tree/master/MPD/ETWMonThread/</a><o:p></o:p></span></p>
+
+<p><span style='font-family:Arial'>Video <span class=SpellE>ETWMonThread.cs</span>
+[step by step]: <a href="https://www.youtube.com/watch?v=nIoDrqeQ2es">https://www.youtube.com/watch?v=nIoDrqeQ2es</a><o:p></o:p></span></p>
+
+<p><span class=GramE><span style='font-family:Arial'>as</span></span><span
+style='font-family:Arial'> you can see this ETW is very useful thing for Thread
+Monitoring also is useful to show Injected Threads also Injector Processes... (<b
+style='mso-bidi-font-weight:normal'>Sometimes</b>) and I think Some
+Anti-viruses need to use this ETW or something like this but always attackers
+have some Methods for bypassing your things….<o:p></o:p></span></p>
+
+<div id=footer>
+
+<p class=MsoNormal style='margin:3.0pt;background:#6F6F6F'><span
+style='font-family:Arial;color:white'>Last Update: 8 Jun 2020 <o:p></o:p></span></p>
+
+</div>
+
+</div>
+
+</div>
+
+</body>
+
+</html>
