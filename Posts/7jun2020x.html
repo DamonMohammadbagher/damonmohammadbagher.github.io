@@ -33,7 +33,7 @@ Thread Injection in this case “Remote Thread Injection”.<o:p></o:p></span></
 
 <p><span style='font-family:Arial'>I made simple C# code “<span class=SpellE><b
 style='mso-bidi-font-weight:normal'>ETWMonThread.cs</b></span>” for <span
-class=SpellE>Meterpreter</span> Payload/Thread Injection Monitoring in 2018.<o:p></o:p></span></p>
+class=SpellE>Monitoring Meterpreter</span> Payload/Thread Injection in 2018.<o:p></o:p></span></p>
 
 <p><span class=GramE><span style='font-family:Arial'>this</span></span><span
 style='font-family:Arial'> code was simple &amp; my goal was to Show how We can
@@ -44,30 +44,8 @@ use ETW very simple and useful… <o:p></o:p></span></p>
 <p><span class=GramE><span style='font-family:Arial'>in</span></span><span
 style='font-family:Arial'> this code we have something like this :<o:p></o:p></span></p>
 
-<p><span style='font-family:Arial'><!--[if gte vml 1]><v:shapetype id="_x0000_t75"
- coordsize="21600,21600" o:spt="75" o:preferrelative="t" path="m@4@5l@4@11@9@11@9@5xe"
- filled="f" stroked="f">
- <v:stroke joinstyle="miter"/>
- <v:formulas>
-  <v:f eqn="if lineDrawn pixelLineWidth 0"/>
-  <v:f eqn="sum @0 1 0"/>
-  <v:f eqn="sum 0 0 @1"/>
-  <v:f eqn="prod @2 1 2"/>
-  <v:f eqn="prod @3 21600 pixelWidth"/>
-  <v:f eqn="prod @3 21600 pixelHeight"/>
-  <v:f eqn="sum @0 0 1"/>
-  <v:f eqn="prod @6 1 2"/>
-  <v:f eqn="prod @7 21600 pixelWidth"/>
-  <v:f eqn="sum @8 21600 0"/>
-  <v:f eqn="prod @7 21600 pixelHeight"/>
-  <v:f eqn="sum @10 21600 0"/>
- </v:formulas>
- <v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/>
- <o:lock v:ext="edit" aspectratio="t"/>
-</v:shapetype><v:shape id="_x0000_i1025" type="#_x0000_t75" style='width:444.75pt;
- height:101.25pt'>
- <v:imagedata src="7jun2020x_files/image003.png" o:title="csharp1"/>
-</v:shape><![endif]--><![if !vml]><img width=593 height=135
+<p><span style='font-family:Arial'>
+<![if !vml]><img width=593 height=135
 src="7jun2020x_files/image004.jpg" v:shapes="_x0000_i1025"><![endif]><o:p></o:p></span></p>
 
 <p><span style='font-family:Arial'>Picture 1: <span class=SpellE>ETWEventsFilters</span>
@@ -78,10 +56,7 @@ Thread IDs (<span class=SpellE>TIDs</span>) with ETW then you need to get only
 Injected Thread which means Thread Created by Process A into Process B so with
 this simple Code you can get this:<o:p></o:p></span></p>
 
-<p><span style='font-family:Arial'><!--[if gte vml 1]><v:shape id="_x0000_i1026"
- type="#_x0000_t75" style='width:811.5pt;height:114.75pt'>
- <v:imagedata src="7jun2020x_files/image005.png" o:title="csharp"/>
-</v:shape><![endif]--><![if !vml]><img width=1082 height=153
+<p><span style='font-family:Arial'><![if !vml]><img width=1082 height=153
 src="7jun2020x_files/image006.jpg" v:shapes="_x0000_i1026"><![endif]><o:p></o:p></span></p>
 
 <p><span style='font-family:Arial'>Picture 2: Detecting Injector PID.<o:p></o:p></span></p>
@@ -104,10 +79,7 @@ Session Closed… … (<span class=GramE>click</span> on Picture for better reso
 <o:p></o:p></span></p>
 
 <p><span style='font-family:Arial'><a href="7jun2020x_files/HOLLOW-ETW.png"
-target="_blank"><span style='color:windowtext'><!--[if gte vml 1]><v:shape
- id="_x0000_i1029" type="#_x0000_t75" style='width:908.25pt;height:274.5pt'>
- <v:imagedata src="7jun2020x_files/image007.png" o:title="HOLLOW-ETW"/>
-</v:shape><![endif]--><![if !vml]><img border=0 width=1211 height=366
+target="_blank"><span style='color:windowtext'><![if !vml]><img border=0 width=1211 height=366
 src="7jun2020x_files/image009.jpg" v:shapes="_x0000_i1029"><![endif]></span></a><o:p></o:p></span></p>
 
 <p><span style='font-family:Arial'>Picture 3: Process &amp; TID Detected by ETW
@@ -127,10 +99,8 @@ Session Closed… (<span class=GramE>click</span> on Picture for better resoluti
 <o:p></o:p></span></p>
 
 <p><b style='mso-bidi-font-weight:normal'><span style='font-family:Arial'><a
-href="7jun2020x_files/APCQ-ETW.png" target="_blank"><span style='color:windowtext'><!--[if gte vml 1]><v:shape
- id="_x0000_i1028" type="#_x0000_t75" style='width:909pt;height:301.5pt'>
- <v:imagedata src="7jun2020x_files/image010.png" o:title="APCQ-ETW"/>
-</v:shape><![endif]--><![if !vml]><img border=0 width=1212 height=402
+href="7jun2020x_files/APCQ-ETW.png" target="_blank"><span style='color:windowtext'>
+<![if !vml]><img border=0 width=1212 height=402
 src="7jun2020x_files/image012.jpg" v:shapes="_x0000_i1028"><![endif]></span></a><o:p></o:p></span></b></p>
 
 <p><span style='font-family:Arial'>Picture 4: Process &amp; TID Detected by ETW
@@ -184,10 +154,8 @@ normal'>CreateRemoteThread</b></span> Function.<o:p></o:p></span></p>
 class=GramE>click</span> on Picture for better resolution) <o:p></o:p></span></p>
 
 <p><b><span style='font-family:Arial'><a href="7jun2020x_files/1.png"
-target="_blank"><span style='color:windowtext'><!--[if gte vml 1]><v:shape
- id="_x0000_i1027" type="#_x0000_t75" style='width:982.5pt;height:515.25pt'>
- <v:imagedata src="7jun2020x_files/image001.png" o:title="1"/>
-</v:shape><![endif]--><![if !vml]><img border=0 width=1310 height=687
+target="_blank"><span style='color:windowtext'>
+<![if !vml]><img border=0 width=1310 height=687
 src="7jun2020x_files/image008.jpg" v:shapes="_x0000_i1027"><![endif]></span></a><o:p></o:p></span></b></p>
 
 <p><span style='font-family:Arial'>Picture 5: “NativePayload_TId2” Payload
@@ -231,10 +199,8 @@ style='font-family:Arial'> <o:p></o:p></span></p>
 for better resolution) <o:p></o:p></span></p>
 
 <p><span style='font-family:Arial'><a href="7jun2020x_files/2.png"
-target="_blank"><span style='color:windowtext'><!--[if gte vml 1]><v:shape
- id="_x0000_i1030" type="#_x0000_t75" style='width:1023.75pt;height:5in'>
- <v:imagedata src="7jun2020x_files/image002.png" o:title="2"/>
-</v:shape><![endif]--><![if !vml]><img border=0 width=1365 height=480
+target="_blank"><span style='color:windowtext'>
+<![if !vml]><img border=0 width=1365 height=480
 src="7jun2020x_files/image011.jpg" v:shapes="_x0000_i1030"><![endif]></span></a><o:p></o:p></span></p>
 
 <p><span style='font-family:Arial'>Picture 6: “NativePayload_TId3<span
@@ -262,10 +228,8 @@ Detected/Closed.<o:p></o:p></span></p>
 for better resolution) <o:p></o:p></span></p>
 
 <p><span style='font-family:Arial'><a href="7jun2020x_files/3.png"
-target="_blank"><span style='color:windowtext'><!--[if gte vml 1]><v:shape
- id="_x0000_i1031" type="#_x0000_t75" style='width:1006.5pt;height:5in'>
- <v:imagedata src="7jun2020x_files/image013.png" o:title="3"/>
-</v:shape><![endif]--><![if !vml]><img border=0 width=1342 height=480
+target="_blank"><span style='color:windowtext'>
+<![if !vml]><img border=0 width=1342 height=480
 src="7jun2020x_files/image014.jpg" v:shapes="_x0000_i1031"><![endif]></span></a><span
 style='mso-spacerun:yes'> </span>Picture 7: “NativePayload_TId3<span
 class=GramE>” <span style='mso-spacerun:yes'> </span>Creating</span> Remote Thread.<o:p></o:p></span></p>
@@ -287,10 +251,8 @@ session too, very simple. <o:p></o:p></span></p>
 <p><span style='font-family:Arial'><o:p>&nbsp;</o:p></span></p>
 
 <p><span style='font-family:Arial'><a href="7jun2020x_files/avira1.png"
-target="_blank"><span style='color:windowtext'><!--[if gte vml 1]><v:shape
- id="_x0000_i1032" type="#_x0000_t75" style='width:1020pt;height:390pt'>
- <v:imagedata src="7jun2020x_files/image015.png" o:title="avira1"/>
-</v:shape><![endif]--><![if !vml]><img border=0 width=1360 height=520
+target="_blank"><span style='color:windowtext'>
+<![if !vml]><img border=0 width=1360 height=520
 src="7jun2020x_files/image016.jpg" v:shapes="_x0000_i1032"><![endif]></span></a><o:p></o:p></span></p>
 
 <p><span class=GramE><span style='font-family:Arial'>Picture 8: this simple method
@@ -299,10 +261,8 @@ not detected by AVIRA.</span></span><span style='font-family:Arial'><o:p></o:p><
 <p><span style='font-family:Arial'><o:p>&nbsp;</o:p></span></p>
 
 <p><span style='font-family:Arial'><a href="7jun2020x_files/avira2.png"
-target="_blank"><span style='color:windowtext'><!--[if gte vml 1]><v:shape
- id="_x0000_i1033" type="#_x0000_t75" style='width:1027.5pt;height:393.75pt'>
- <v:imagedata src="7jun2020x_files/image017.png" o:title="avira2"/>
-</v:shape><![endif]--><![if !vml]><img border=0 width=1370 height=525
+target="_blank"><span style='color:windowtext'>
+<![if !vml]><img border=0 width=1370 height=525
 src="7jun2020x_files/image018.jpg" v:shapes="_x0000_i1033"><![endif]></span></a><span
 style='mso-spacerun:yes'> </span><span class=GramE>Picture 9: this simple method
 not detected by AVIRA.</span><o:p></o:p></span></p>
