@@ -1,0 +1,122 @@
+﻿<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=utf-8">
+<title>ETW + Some Important Things for Defenders</title>
+<link rel=Stylesheet type="text/css" media=all href="6Aug2020x_files/styles.css">
+<style>
+
+</style>
+
+</head>
+
+<body bgcolor=white background="6Aug2020x_files/x3.jpeg" lang=EN-US
+link=darkorange vlink=blue style='tab-interval:35.45pt'>
+
+<div  class=Section1>
+
+<div >
+
+<div id=header>
+
+<p class=MsoNormal style='margin:2.25pt;line-height:30.0pt;mso-outline-level:
+2;background:#F3F2ED'><b><span style='font-family:Arial;
+mso-font-kerning:18.0pt'>ETW + Some Important Things for Defenders</o:p></span></b></p>
+
+</div>
+
+<p><b><span style='font-family:Arial'><o:p>&nbsp;</o:p></span></b></p>
+
+<p><b><span style='font-family:Arial'>ETW + Some Important Things for Defenders<span
+style='mso-spacerun:yes'>  </span><o:p></o:p></span></b></p>
+
+<p><span style="font-family: Arial">In this article i want to talk about <b>ETW</b> 
+&amp; some important things (in my opinion) for Defenders, before anything i want to 
+say programming by C# + <b>ETW</b> is not hard so</span></p>
+<p><span style="font-family: Arial">i think all C# developer can use that 
+especially for Defense Approach.&nbsp;&nbsp;&nbsp; </span></p>
+<p><img border="0" src="6Aug2020x_files/Code.png" width="965" height="568"></p>
+<p>Picture 1: C# code for some interesting things with ETW</p>
+<p>&nbsp;</p>
+
+<p><span dir="ltr"><font face="Arial">in this code i want to show some important 
+things for Processes in memory like<b> &quot;VirtualMemAlloc, Threads, New Processes, 
+Dll, Network Connections&quot;</b>. </font></span></p>
+<p><font face="Arial"><i>(for better resolution: please click on picture) </i>&nbsp;</font></p>
+
+<p><a target="_blank" href="6Aug2020x_files/0.png">
+<img border="0" src="6Aug2020x_files/0.png" width="1268" height="524"></a></p>
+<p>Picture 2: VirtualMemAlloc in target Process (Notepad) Detected by ETW &amp; C# 
+Code </p>
+<p>&nbsp;</p>
+<p><span dir="ltr">in this Picture 2 you can see Thread Injection into Notepad 
+by &quot;NativePayload_TId2&quot; tool and in step2 we have <b>VirtualMemAlloc</b> which called 
+by injector for attack in-memory to</span></p>
+<p><span dir="ltr">Notepad and this step Detected by ETW in kernel very simple 
+and you can see which <b>End-Address</b> &amp; <b>Length-Hex</b> .</span></p>
+<p>in next Picture 3 you can see with this tool i had <b>Meterpreter</b> shell via 
+Thread Injection...</p>
+<p><font face="Arial"><i>(for better resolution: please click on picture) </i>&nbsp;</font></p>
+
+<p><a target="_blank" href="6Aug2020x_files/1.png">
+<img border="0" src="6Aug2020x_files/1.png" width="1231" height="649"></a></p>
+<p>Picture 3: Thread injection attack (Meterpreter session) &amp; thread injection 
+Detected by ETW &amp; C# 
+Code </p>
+<p>&nbsp;</p>
+<p><span style="font-family: Arial">with &quot;<b>NativePayload_TId2.exe 9684 
+[payload]</b>&quot; we have this (<b>Intptr Address:<font color="#FF8C00">21A75810000</font></b>) 
+which means Code Injected to Notepad Memory with this Pointer-Address </span></p>
+<p><span style="font-family: Arial">and with this &quot;<b>NativePayload_TId3.exe&nbsp; 
+1234&nbsp; 9684&nbsp; 21A75810000</b>&quot; we have Session very simple and you can 
+see these information Detected by ETW...</span></p>
+<p><span style="font-family: Arial">as you can see <b>TID:4232</b> Injected into 
+&quot;<b>Notepad</b>&quot; by &quot;NativePayload_TId3&quot; and we have these information by ETW very simple 
+also you can see which DLL loaded in memory by that Injected Thread.</span></p>
+<p>&nbsp;</p>
+<p><span style="font-family: Arial; font-weight:700">Important point:</span></p>
+<p><span style="font-family: Arial">&nbsp;this attack had two parts, 
+first <b>VirtualMemAlloc</b> which in this part i used &quot;<b>NativePayload_TId2</b>&quot; 
+and second part is <b>CreateRemoteThread</b> which in this part i used &quot;<b>NativePayload_TId3</b>&quot; 
+code, so by <b>ETW</b> we have <b><font color="#FF8C00">VirtualMemAlloc</font></b> 
+event <b>+<font color="#FF8C00"> intptr Address</font></b> also with ETW we have 
+Thread Injection Event etc. if you have something like <b>&quot;Process-Access&quot;</b> 
+event by ETW then you can see both code <b>NativePayload_TId2 and 3</b> in your 
+Event logs which had Access to<b> Notepad.exe </b>with PID:9684 , first had <b>
+VirtualMemAlloc</b> (NativePayload_TId2) and second had <font color="#6F6F6F">
+<b>Thread Injection/CreateRemoteThread</b></font> (NativePayload_TId3), as 
+Defender for you it means we have/had two unknown Process which had Access to 
+Notepad and Notepad have/had <b>Network Connection</b> (Meterpreter Session) to 
+Attacker system... then perhaps you will say &quot;HUM&quot;<b>.</b></span></p>
+<p><font face="Arial"><i>(for better resolution: please click on picture) </i>&nbsp;</font></p>
+
+<p><a target="_blank" href="6Aug2020x_files/2.png">
+<img border="0" src="6Aug2020x_files/2.png" width="1259" height="596"></a></p>
+<p>Picture 4: Thread injection attack (Meterpreter session) &amp; ETW </p>
+<p>in the next &quot;picture 5&quot; you can see i tested ETW with &quot;<b>Process Hollowing</b>&quot; 
+Technique</p>
+<p><font face="Arial"><i>(for better resolution: please click on picture) </i>&nbsp;</font></p>
+
+<p><a target="_blank" href="6Aug2020x_files/3.png">
+<img border="0" src="6Aug2020x_files/3.png" width="1236" height="606"></a></p>
+<p>Picture 5: Thread injection attack (Meterpreter session) &amp; ETW </p>
+<p>&nbsp;</p>
+<p>As you can see in these Tests and Pictures if you want to use ETW,</p>
+<p>this will help you a lot and <b>ETW</b> is &quot;very useful&quot; thing for Defenders 
+&amp; Blue teams too.</p>
+<p>&nbsp;</p>
+
+<div id=footer>
+
+<p class=MsoNormal style='margin:3.0pt;background:#6F6F6F'><span
+style='font-family:Arial;color:white'>Last Update: 06 Aug 2020 <o:p></o:p></span></p>
+
+</div>
+
+</div>
+
+</div>
+
+</body>
+
+</html>
