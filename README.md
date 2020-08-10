@@ -1,8 +1,8 @@
 ## Damon Mohammadbagher (Security Researcher)
 
 I will share my articles & posts + C# Codes here & 
-[ [Linkedin Articles](https://www.linkedin.com/today/author/damonmohammadbagher?trk=author-info__article-link),
-[Peerlyst Posts](https://www.peerlyst.com/users/damon-mohammadbagher) ]
+[ [Linkedin Articles](https://www.linkedin.com/today/author/damonmohammadbagher?trk=author-info__article-link), [Medium Posts](https://medium.com/@DamonMohammadbagher),
+[Peerlyst Posts](https://www.peerlyst.com/users/damon-mohammadbagher)]
 
 - Aug 6, 2020 [ETW + Some Important Things for Defenders](/Posts/6Aug2020x.html)
 - Jul 11, 2020 [Windows Defender Bypassed very simple... (Payload Detection In-Memory)](/Posts/11Jul2020x.html)
