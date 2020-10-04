@@ -1,7 +1,7 @@
 ## Damon Mohammadbagher (Security Researcher)
 
 I will share my articles & posts + C# Codes here & 
-[ [Linkedin Articles](https://www.linkedin.com/today/author/damonmohammadbagher?trk=author-info__article-link),[Medium Posts](https://medium.com/@DamonMohammadbagher)]
+[ [Linkedin Articles](https://www.linkedin.com/today/author/damonmohammadbagher?trk=author-info__article-link), [Medium Posts](https://medium.com/@DamonMohammadbagher)]
 
 - Aug 6, 2020 [ETW + Some Important Things for Defenders](/Posts/6Aug2020x.html)
 - Jul 15, 2020 [My Research/test for "Kaspersky Endpoint Security v11.4.0.23"](/Posts/15Jul2020x.html)
