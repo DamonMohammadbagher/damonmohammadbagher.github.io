@@ -4,7 +4,7 @@
 )]
 - I will share my articles & posts + C# Codes here 
 [ [Linkedin Articles](https://www.linkedin.com/today/author/damonmohammadbagher), [Medium Posts ](https://medium.com/@DamonMohammadbagher)]
-------------
+
 
 
 - Aug 6, 2020 [ETW + Some Important Things for Defenders](/Posts/6Aug2020x.html)
