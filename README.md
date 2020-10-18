@@ -2,7 +2,7 @@
 
 - In this page you can read my ebook [ [Bypassing Anti-Viruses by C#.NET Programming ](https://damonmohammadbagher.github.io/Posts/ebookBypassingAVsByCsharpProgramming/index.htm
 )]
-- I will share my articles & posts + C# Codes here 
+- I will share my articles & posts + C# Codes here & 
 [ [Linkedin Articles](https://www.linkedin.com/today/author/damonmohammadbagher), [Medium Posts ](https://medium.com/@DamonMohammadbagher)]
 
 -------------------------------------------------------------
