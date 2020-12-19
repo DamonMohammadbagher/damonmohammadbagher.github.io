@@ -16,7 +16,7 @@
 - Jun 1, 2020 [Bypassing Anti-Viruses with Thread Injection Technique + C# Delegate & ETW](/Posts/1jun2020x.html)
 
 -------------------------------------------------------------
-<p align="center"><a href="https://www.twitter.com/_damon_m_"> <img src="2.jpeg" height="30" width="30"> </a></p>
+<p align="center"><a href="https://www.twitter.com/_damon_m_"> <img src="tw_ico.jpeg" height="30" width="30"> </a></p>
 
 
 
