@@ -15,6 +15,8 @@
 - Jun 7, 2020 [Detecting Thread Injection by ETW & One Simple Technique](/Posts/7jun2020x.html)
 - Jun 1, 2020 [Bypassing Anti-Viruses with Thread Injection Technique + C# Delegate & ETW](/Posts/1jun2020x.html)
 
+-------------------------------------------------------------
+<p align="center"><a href="https://www.twitter.com/_damon_m_"> <img src="10.png" height="40" width="40"> </a></p>
 
 
 
