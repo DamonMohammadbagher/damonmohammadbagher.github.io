@@ -8,6 +8,7 @@
 
 -------------------------------------------------------------
 
+- Dec 28, 2020 [Payload & Technique Detection](/Posts/28Dec2020x.html)
 - Dec 12, 2020 [Video : Simple C# Delegate Techniques for Remote Thread Injection Attack.](https://www.youtube.com/watch?v=kCgHl-UnM-s)
 - Aug 6, 2020 [ETW + Some Important Things for Defenders](/Posts/6Aug2020x.html)
 - Jul 15, 2020 [My Research/test for "Kaspersky Endpoint Security v11.4.0.233"](/Posts/15Jul2020x.html)
