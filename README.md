@@ -8,6 +8,7 @@
 
 -------------------------------------------------------------
 
+- Feb 01, 2021 [Chapter 14 : C# Delegate & Remote Thread Injection Technique (Part1).](https://github.com/DamonMohammadbagher/eBook-BypassingAVsByCSharp/tree/master/CH14)
 - Jan 15, 2021 [Video : "Memhunter" vs "Sysmon v13.01" & Process Hollowing Technique.](https://www.youtube.com/watch?v=XBkXnqyI8uM)
 - Dec 28, 2020 [Payload & Technique Detection](/Posts/28Dec2020x.html)
 - Dec 12, 2020 [Video : Simple C# Delegate Techniques for Remote Thread Injection Attack.](https://www.youtube.com/watch?v=kCgHl-UnM-s)
