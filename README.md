@@ -8,6 +8,7 @@
 
 -------------------------------------------------------------
 
+- Feb 12, 2021 [Remote Thread Injection & API Monitoring + ETW for Defenders.](/Posts/11Feb2021x.html)
 - Feb 01, 2021 [Chapter 14 : C# Delegate & Remote Thread Injection Technique (Part1).](https://github.com/DamonMohammadbagher/eBook-BypassingAVsByCSharp/tree/master/CH14)
 - Jan 15, 2021 [Video + "Memhunter" vs "Sysmon v13.01" & Process Hollowing Technique.](https://damonmohammadbagher.medium.com/memhunter-vs-sysmon-v13-01-process-hollowing-technique-5f67d6907aff)
 - Dec 28, 2020 [Payload & Technique Detection](/Posts/28Dec2020x.html)
