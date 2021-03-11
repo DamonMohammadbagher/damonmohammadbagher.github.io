@@ -8,7 +8,7 @@
 
 -------------------------------------------------------------
 
-- Mar 11, 2021 [Memory Mapping File & Connection in-memory between Backdoor & Proxy Process](/Posts/11mar2021x.html)
+- Mar 11, 2021 [Memory Mapping File & Connection in-memory between Backdoor & Proxy Process](/Posts/10mar2021x.html)
 - Feb 21, 2021 [Chapter 14 : C# Delegate & Remote Thread Injection Technique (Part2).](https://github.com/DamonMohammadbagher/eBook-BypassingAVsByCSharp/tree/master/CH14)
 - Feb 12, 2021 [Remote Thread Injection & API Monitoring + ETW for Defenders.](/Posts/11Feb2021x.html)
 - Feb 01, 2021 [Chapter 14 : C# Delegate & Remote Thread Injection Technique (Part1).](https://github.com/DamonMohammadbagher/eBook-BypassingAVsByCSharp/tree/master/CH14)
