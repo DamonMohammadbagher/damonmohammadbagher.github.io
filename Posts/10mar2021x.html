@@ -84,7 +84,7 @@ you can see we have two cmd.exe Process which are our backdoor (cmd.exe:6292) an
  <p><img src="10mar2021x_files/injec2.jpeg" width="1509" height="659" border="0"></p>
 <p>Picture 8: NativePayload_CSI integration with "NativePayload_MP" + NativePayload_MPAgent</p>
 <p>&nbsp;</p>
-<p><b>Note:</b> "always in the first step you should run [NativePayload_MPAgent.exe], because our MemoryMappedFile will Create with this backdoor in memory then in the next Steps [NativePayload_MPx.exe] will Open/read/write Date in this Memory Map File" </p>
+<p><b>Note:</b> "always in the first step you should run [NativePayload_MPAgent.exe], because our MemoryMappedFile will Create with this backdoor in memory then in the next Steps [NativePayload_MPx.exe] will Open/read/write Data in this Memory Map File" </p>
 <p>"NativePayload_MP.cs" (old version) code was as Mapper for working with NativePayload_MPAgent as backdoor in Memory only [Pictures 5,6] </p>
 <p>"NativePayload_MP1.cs" code is Mapper/Proxy tool for working with NativePayload_HTTP.sh as web Exfil-server tool [Picture 1] </p>
 <p>"NativePayload_MP2.cs" code is Mapper/Proxy tool for working with nc (Netcat) [Pictures 3,4]</p>
