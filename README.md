@@ -8,7 +8,7 @@
 
 -------------------------------------------------------------
 
-- Mar 13, 2021 [C# Codes for Some Callback Function (Code Execution Technique without CreateThread)](https://github.com/DamonMohammadbagher/NativePayload_CBT)
+- Mar 13, 2021 [C# Codes for Some Callback Function Techniques (Exec without CreateThread)](https://github.com/DamonMohammadbagher/NativePayload_CBT)
 - Mar 11, 2021 [MMF & Connection in-memory between Backdoor & Proxy Process](/Posts/10mar2021x.html)
 - Feb 21, 2021 [Chapter 14 : C# Delegate & Remote Thread Injection Technique (Part2).](https://github.com/DamonMohammadbagher/eBook-BypassingAVsByCSharp/tree/master/CH14)
 - Feb 12, 2021 [Remote Thread Injection & API Monitoring + ETW for Defenders.](/Posts/11Feb2021x.html)
