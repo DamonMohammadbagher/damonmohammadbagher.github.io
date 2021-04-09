@@ -7,7 +7,7 @@
 [ [Linkedin Articles](https://www.linkedin.com/today/author/damonmohammadbagher), [Medium Posts ](https://medium.com/@DamonMohammadbagher)]
 
 -------------------------------------------------------------
-
+- Apr 09, 2021 [Chapter 14 : C# Delegate & Remote Thread Injection Technique (Part3).](https://github.com/DamonMohammadbagher/eBook-BypassingAVsByCSharp/tree/master/CH14)
 - Mar 29, 2021 [Call/Invoke Async C# Method via Callback Function APIs](Posts/29mar2021x.html)
 - Mar 24, 2021 [Callback Function Techniques & Native Code Execution](Posts/24_1mar2021x.html)
 - Mar 13, 2021 [C# Codes for Some Callback Function Techniques (Exec without CreateThread)](https://github.com/DamonMohammadbagher/NativePayload_CBT)
