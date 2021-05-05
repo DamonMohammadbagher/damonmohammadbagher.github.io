@@ -1,0 +1,82 @@
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Remote Thread Injection + C# Async Method + CallBack Functions Technique (Changing Code Behavior)</title>
+<link rel="Stylesheet" type="text/css" media="all" href="05may2021x_files/styles.css">
+<style>
+
+</style>
+
+</head>
+
+<body style="tab-interval:35.45pt" vlink="blue" link="darkorange" lang="EN-US" bgcolor="white" background="05may2021x_files/x3.jpeg">
+
+<div class="Section1">
+
+<div>
+
+<div id="header">
+
+<p class="MsoNormal" style="margin:2.25pt;line-height:30.0pt;mso-outline-level:
+2;background:#F3F2ED"><b><span style="font-family:Arial;
+mso-font-kerning:18.0pt">Remote Thread Injection + C# Async Method + CallBack Functions Technique (Changing Code Behavior)</span></b></p>
+
+</div>
+
+<p><b><span style="font-family:Arial"><o:p>&nbsp;</o:p></span></b></p>
+
+<p><b><span style="font-family:Arial">Remote Thread Injection + C# Async Method + CallBack Functions Technique (Changing Code Behavior)<span style="mso-spacerun:yes">&nbsp; </span><o:p></o:p></span></b></p>
+
+<p><span style="font-family: Arial"></span></p><p>in this article i want to
+ talk about simple technique to call C# Method like Async C# Method + "Callback Functions APIs" & Remote Thread Injection Technique. in this Technique in Codes We have "CreateRemoteThread or NtCreateThreadEx" BUT the goal is Changing "Code Behavior" for Calling API Functions (Remote Thread Injection only), so we have these APIs<b>(OpenProcess,VirtualAllocEx,WriteProcessMemory,CreateRemoteThread)</b> which these API called in separated C# Methods and these separated Methods Called like Async Method via CBT CallBack functions Technique so we have something like this:
+ <span style="font-family:Arial;color:grey; "><b>
+ Remote Thread Injection + C# Async Method + CallBack functions Technique</b>
+</span>      
+ </p><p>let me show you something to explain this Technique, as you can see in the "Picture 1".</p>
+ <p></p>
+<p><img src="05may2021x_files/1.png" width="1273" height="575" border="0"></p>
+<p>Picture 1: NativePayload_TiACBT.cs</p>
+<p>as you can see in line number (218) we have one delegate code which is void and this delegate will call some C# Method like _Step1_() , _Step2_() ,_Step3_() ,_Step4_()  and these C# methods will call via CBT CallBack function Techniques so our C# Method will call like Async Methods, with this simple technique you can see we have new method to call APIs & Code so we have new Behavior...</p> 
+<p>so our delegate "AsyncSteps" will call our C# Methods which we can see in line numbers 234,235,236,237 which these delegate will call C# Methods _step1_() up to _step_4() , finally these Delegates Invoked via CBT CallBack Function in this case "EnumUILanguagesA" , in these lines number 246 up to 254</p>
+<p>&nbsp;</p>
+<p><img src="05may2021x_files/2.png" width="1279" height="679" border="0"></p>
+<p>Picture 2: NativePayload_TiACBT.cs [mode 1]</p>
+<p>in the "Picture 2" you can see this code worked very well and in line number 201 up to 209 you can see for example _Step4_() Method Codes which invoked via Callback functions like Aync Method and finally "CreateRemoteThread" executed in memory and meterpreter session established very well.</p>
+<p>so we have something like this:<p><span style="font-family:Arial;color:red; ">NativeAPI[EnumUILanguagesA] --> C# Delegate[AsyncSteps] --> C# Method[_Step1...4_] --> NativeAPI[OpenProcess,...CreateRemoteThread/NtCreateThreadEx] </span></p> </p>
+<p>in the next "Picture 3" we have some new NativeAPI and again new Code & new method to invoke C# delegate/Methods ...</p>
+<p><img src="05may2021x_files/3.png" width="1289" height="671" border="0"></p>
+<p>Picture 3: NativePayload_TiACBT.cs [mode 2]</p>
+<p>Ain this mode2 we have two Callback functions (EnumUILanguagesA, EnumSystemLocalA) but in mode1 we have only one function (EnumUILanguagesA) </p> 
+<p>so we have something like this: step1<p><span style="font-family:Arial;color:red; ">NativeAPI[EnumUILanguagesA] --> C# Delegate[AsyncSteps] --> C# Method[_Step1_] --> NativeAPI[OpenProcess] </span></p> </p>
+<p>so we have something like this: step2<p><span style="font-family:Arial;color:red; ">NativeAPI[EnumSystemLocalA] --> C# Delegate[AsyncSteps] --> C# Method[_Step2_] --> NativeAPI[VirtualAllocEx] </span></p> </p>
+<p>so we have something like this: step3<p><span style="font-family:Arial;color:red; ">NativeAPI[EnumSystemLocalA] --> C# Delegate[AsyncSteps] --> C# Method[_Step3_] --> NativeAPI[WriteProcessMemory] </span></p> </p>
+<p>so we have something like this: step4<p><span style="font-family:Arial;color:red; ">NativeAPI[EnumUILanguagesA] --> C# Delegate[AsyncSteps] --> C# Method[_Step4_] --> NativeAPI[CreateRemoteThread] </span></p> </p>
+<p>as you can see in the "Picture 3", in this mode2 something is changed which is step2 and step3, this mode2 is good idea for stress test for some AVs ;)</p> <p>&nbsp;</p>
+<p>in the next "Picture 4", we have next code "NativePayload_TiACBT2.cs" , in this code we have [4 steps] for Remote Thread Injection like these steps:</p> 
+<p><img src="05may2021x_files/4.png" width="1301" height="679" border="0"></p>
+<p>Picture 4: NativePayload_TiACBT2.cs</p>
+<p>as you can see in this case our each steps invoked from previous step which means Step2 invoked from C# Method for Step1, step3 invoked from C# Method for step2, finally step4 invoked from C# Method for step3 and all C# Method Call/invoked like Async C# Method via CallBack API Functions</p>
+<p>as you can see in the "Picture 4", my API Monitor Report for "NativePayload_TiACBT2.cs" was different with "Picture 3" for "NativePayload_TiACBT.cs" so in this case we have new method to call APIs and New code Behavior again.</p> 
+<p><span style="font-family:Arial;color:red; ">NativeAPI[EnumUILanguagesA] --> C# Delegate[AsyncSteps] --> C# Method[_Step1_] --> NativeAPI[OpenProcess]</span></p>
+<p>&nbsp;&nbsp;&nbsp;<span style="font-family:Arial;color:red; ">|-> NativeAPI[EnumUILanguagesA] --> C# Delegate[AsyncSteps] --> C# Method[_Step2_] --> NativeAPI[VirtualAllocEx]</span></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-family:Arial;color:red; ">|-> NativeAPI[EnumUILanguagesA] --> C# Delegate[AsyncSteps] --> C# Method[_Step3_] --> NativeAPI[WriteProcessMemory]</span></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-family:Arial;color:red; ">|-> NativeAPI[EnumUILanguagesA] --> C# Delegate[AsyncSteps] --> C# Method[_Step4_] --> NativeAPI[NtCreateThreadEx]</span></p>
+<p>&nbsp;</p>
+<p>and you can see in the next "Picture 5" my Test for Windows defender (update:2020/12/20) with this Technique, as you can see my payload Was detected by Windows Defender in memory BUT i had Meterpreter Session!  ¯\_(ツ)_/¯</p>
+<p><img src="05may2021x_files/5.png" width="1499" height="691" border="0"></p>
+<p>Picture 5: Payload in memory detected by Bitdefender</p>
+<p>&nbsp;</p>
+<p><b>Related Article about Calling Async C# Method via Callback Function Technique:</b> <a target="_blank" href="https://damonmohammadbagher.github.io/Posts/29mar2021x.html">https://damonmohammadbagher.github.io/Posts/29mar2021x.html</a></p>
+<p><b>Related Article about Callback function Techniques CBT:</b> <a target="_blank" href="https://damonmohammadbagher.github.io/Posts/24_1mar2021x.html">https://damonmohammadbagher.github.io/Posts/24_1mar2021x.html</a></p>
+<p>Source Codes are here: <a target="_blank" href="https://github.com/DamonMohammadbagher/NativePayload_TiACBT">https://github.com/DamonMohammadbagher/NativePayload_TiACBT</a></p>
+
+<p><b>at a glance:</b> as Pentester/RedTeamer you can use these Techniques in your own code for changing Behavior of Code 
+also you can use these Methods in your Target AVs ¯\_(ツ)_/¯ </p>
+
+<div id="footer">
+
+<p class="MsoNormal" style="margin:3.0pt;background:#6F6F6F"><span style="font-family:Arial;color:white">Last Update: 05 May 2021 <o:p></o:p></span></p>
+</div>
+</div>
+</div>
+</body>
+</html>
