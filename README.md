@@ -7,8 +7,8 @@
 [ [Linkedin Articles](https://www.linkedin.com/today/author/damonmohammadbagher), [Medium Posts ](https://medium.com/@DamonMohammadbagher)]
 
 -------------------------------------------------------------
-- Jun 12, 2021 [Video : C# + ETW vs Some Thread/Process/Code Injection Techniques](https://share.vidyard.com/watch/4kB2Xy1bLfhRxaTD6pwaLD?)
-- Jun 09, 2021 [Video : CH15, ETW/C# & Monitoring Process/Threads/.. + Network via ETW](https://share.vidyard.com/watch/6bYvcF75FqQ3BomZELpQUj?)
+- Jun 12, 2021 [Video : C# + ETW vs Some Thread/Process/Code Injection Techniques](https://share.vidyard.com/watch/4kB2Xy1bLfhRxaTD6pwaLD)
+- Jun 09, 2021 [Video : CH15, ETW/C# & Monitoring Process/Threads/.. + Network via ETW](https://share.vidyard.com/watch/6bYvcF75FqQ3BomZELpQUj)
 - Jun 06, 2021 [Video : CH15, ETW/C# & Monitoring Network Connections via ETW](https://share.vidyard.com/watch/5ybRwUbt2b3d3M3ggQiuYQ?)
 - May 05, 2021 [Remote Thread Injection + C# Async Method + CallBack Technique](Posts/05may2021x.html)
 - Apr 09, 2021 [Chapter 14 : C# Delegate & Remote Thread Injection Technique (Part3).](https://github.com/DamonMohammadbagher/eBook-BypassingAVsByCSharp/tree/master/CH14)
