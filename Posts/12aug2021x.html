@@ -69,6 +69,15 @@ my syntax for test this attack technique 9 (CreateRemoteThreadNative) by GoPurpl
 <p><b>Technique/Payload Detection + Alarms by ETW & Memory Scanners</b> </p>
  <p>as you can see in the Pictures 1,2,3 we had GoPurple.exe as Attacker tool and 3 eventIDs for that , now in the "Picture 4" you can see what happened with Command Prompt & Meterpreter Session, as you can see GoPurple.exe executed & Meterpreter Session Established,in localtime [8:56:26] Injection happened & in these times [8:56:30][8:56:33][8:56:34] after 3...4 Seconds i had 3 New Events in Alarms by ETW TAB which Notepad:4684 "Scanned & Found" also you can see details about Injector in this New Event which made by C#.</p> 
 <p>these information is very useful for defenders for detection also as Pentester/RedTeamer you can use your own Offensive tools to test for Detection & Detection bypassing etc , if you can change your TID StartAddress (Spoofing) or if you used Obfuscation/Encryption for Payload in-memory maybe you can bypass this Technique for Detection ;D (Bypassing Memory Scanner for payload detection), some offensive tools will execute payload in meomry & after execute payload immediately will change that or... that means they will rewrite in this StartAddress, so if you wrote some codes to monitoring VirtualMemAlloc on target process you will see some payload byte on some StartAddress <b>changed</b> very fast <b>"always or sometimes"</b>, you can write this code with C# + ETW for Monitoring VirtualMemAlloc events for each process and ETWProcessMon2.exe will save VirtualMemAlloc Events for all processes into text log file too.</p> 
+<p>these two pictures are my last test for (real-time) Monitoring VirtualMemAlloc Events Made by ETW and my test was against meterpreter payload was injected into notepad by Dinvoke.exe (c# code).</p>
+<p><img src="12aug2021x_files/a.png" width="1311" height="703" border="0"></p>
+<p>Picture A: Picture A: Code injected into target process in this case Notepad.exe</p>
+<p>&nbsp;</p>
+<p><img src="12aug2021x_files/b.png" width="1313" height="703" border="0"></p>
+<p>Picture B: this is my result for monitoring "VirtualMemAlloc" ETW Events for Target Process</p>
+
+<p>as you can see Shell code detected in notepad memory very simple.</p>
+<p>&nbsp;</p>
 
 <p><img src="12aug2021x_files/8.png" width="1313" height="673" border="0"></p>
 <p>Picture 4: ETWProcessMon2 & ETWPM2Monitor2 (v2), Technique/Payload Detection by Memory Scanner</p>
