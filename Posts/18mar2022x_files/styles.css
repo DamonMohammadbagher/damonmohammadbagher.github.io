@@ -1,0 +1,23 @@
+html,body{margin:0;padding:0}
+body{font: 100% arial,sans-serif;text-align:left}
+body {background-image: url("x3.jpeg"); }
+p{margin:0 10px 10px}
+a:link {  color:#FF8C00;  background-color: transparent;  text-decoration: none;  padding:5px;}
+a:hover {  color:#FFA500;  background-color: transparent;  text-decoration: underline;  padding:5px;}
+div#header{font: 76%;width:100%;background-color:#F3F2ED; opacity: 0.7;}
+div#header h1{font: 50%;height:40px;line-height:40px;margin:3;padding-left:9px; opacity: 0.8;}
+div#container{text-align:left}
+div#content p{line-height:1.4}
+div#navigation{background:#F6F0E0;}
+div#navigation ul{margin:15px 0; padding:0; list-style-type:none;}
+div#navigation li{margin-bottom:5px;}
+div#extra{background:#CCC8B3;}
+div#footer{background:#6f6f6f;opacity: 0.7;}
+div#footer p{margin:4;padding:5px 10px;color: white;}
+div#container{width:700px;margin:0 auto}
+div#wrapper{float:left;width:100%}
+div#content{margin: 0 150px}
+div#navigation{float:left;width:150px;margin-left:-700px}
+div#extra{float:left;width:150px;margin-left:-150px}
+div#footer{clear:left;width:100%}
+div::after (opacity: 0.5;}
