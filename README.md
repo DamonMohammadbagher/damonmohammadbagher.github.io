@@ -7,6 +7,8 @@
 [ [Linkedin Articles](https://www.linkedin.com/today/author/damonmohammadbagher), [Medium Posts ](https://medium.com/@DamonMohammadbagher)]
 
 ------------------------------------------------------------- 
+- Sep 10, 2022 [if you want to be "Pentester" or "Red-Teamer", at least YOU SHOULD know BASIC things!
+](https://www.linkedin.com/pulse/you-want-pentester-red-teamer-security-researcher-mohammadbagher)
 - Apr 25, 2022 [ETWPM2Monitor2.1 vs SysPM2Monitor2.7 & PoshC2 Server](https://github.com/DamonMohammadbagher/ETWProcessMon2/blob/main/ETWPM2Monitor2.1_vs_SysPM2Monitor2.7/README_20apr2022.md)
 - Apr 02, 2022 [Dll Hollowing Attack vs ESET Endpoint AV & Kaspersky Endpoint Security](/Posts/2apr2022x.html)
 - Mar 18, 2022 [Process Injection (SysPM2Monitor2.7 Sysmon vs ETW ETWPM2Monitor2.1)](/Posts/18mar2022x.html)
