@@ -36,6 +36,7 @@
 
 -------------------------------------------------------------
 <p align="center"><a href="https://www.twitter.com/_Damon_M_"> <img src="tw_ico.jpeg" height="30" width="30"> </a></p>
+<p><a href="https://hits.seeyoufarm.com"><img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https://damonmohammadbagher.github.io/"/></a></p>
 
 
 
