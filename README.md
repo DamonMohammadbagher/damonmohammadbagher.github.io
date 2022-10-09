@@ -7,6 +7,7 @@
 [ [Linkedin Articles](https://www.linkedin.com/today/author/damonmohammadbagher), [Medium Posts ](https://medium.com/@DamonMohammadbagher)]
 
 ------------------------------------------------------------- 
+- Oct 09, 2022 [Video : Memory Mapping & Connection in-memory between Backdoor & Proxy Process](https://www.linkedin.com/posts/damonmohammadbagher_in-this-case-an-attacker-can-use-this-method-activity-6984911439308161024-Uaip)
 - Oct 06, 2022 [Video : Simple C2 Server by C# (Part 2)](https://www.youtube.com/watch?v=4qDNjKiB_tk)
 - Oct 04, 2022 [Video : Simple C2 Server by C#](https://www.youtube.com/watch?v=ulXfVrt8jX0)
 - Sep 10, 2022 [if you want to be "Pentester" or "Red-Teamer", at least YOU SHOULD know BASIC](https://www.linkedin.com/pulse/you-want-pentester-red-teamer-security-researcher-mohammadbagher)
