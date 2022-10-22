@@ -7,6 +7,7 @@
 [ [Linkedin Articles](https://www.linkedin.com/today/author/damonmohammadbagher), [Medium Posts ](https://medium.com/@DamonMohammadbagher)]
 
 ------------------------------------------------------------- 
+- Oct 21, 2022 [Video : Simple C2 Server by C# (Part 4)](https://www.linkedin.com/posts/damonmohammadbagher_video-simple-c2-server-by-c-part-4-sending-activity-6988974020444438528-iIyB)
 - Oct 16, 2022 [Simple C2 Server and Injecting Commands to Pixels (Bmp Files)](https://www.linkedin.com/pulse/simple-c2-server-injecting-commands-pixels-bmp-files-mohammadbagher)
 - Oct 11, 2022 [Video : Simple C2 Server by C# (Part 3)](https://www.youtube.com/watch?v=BEg1Gbn97lc)
 - Oct 09, 2022 [Video : Memory Mapping & Connection in-memory (Backdoor & Proxy Process)](https://www.linkedin.com/posts/damonmohammadbagher_in-this-case-an-attacker-can-use-this-method-activity-6984911439308161024-Uaip)
