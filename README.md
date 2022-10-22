@@ -9,9 +9,9 @@
 ------------------------------------------------------------- 
 - Oct 21, 2022 [Video : Simple C2 Server by C# (Part 4)](https://www.linkedin.com/posts/damonmohammadbagher_video-simple-c2-server-by-c-part-4-sending-activity-6988974020444438528-iIyB)
 - Oct 16, 2022 [Simple C2 Server & Injecting Commands to Pixels(steganography & Images)](https://www.linkedin.com/pulse/simple-c2-server-injecting-commands-pixels-bmp-files-mohammadbagher)
-- Oct 11, 2022 [Video : Simple C2 Server by C# (Part 3)](https://www.youtube.com/watch?v=BEg1Gbn97lc)
+- Oct 11, 2022 [Video : Simple C2 Server by C# (Part 3)](https://www.linkedin.com/posts/damonmohammadbagher_simple-c2-server-by-c-part-3-seatbelt-activity-6985655213864972288-rO0t)
 - Oct 09, 2022 [Video : Memory Mapping & Connection in-memory (Backdoor & Proxy Process)](https://www.linkedin.com/posts/damonmohammadbagher_in-this-case-an-attacker-can-use-this-method-activity-6984911439308161024-Uaip)
-- Oct 06, 2022 [Video : Simple C2 Server by C# (Part 2)](https://www.youtube.com/watch?v=4qDNjKiB_tk)
+- Oct 06, 2022 [Video : Simple C2 Server by C# (Part 2)](https://www.linkedin.com/posts/damonmohammadbagher_simple-c2-server-by-c-part-2-injecting-activity-6983483963394711554-Y1CG)
 - Oct 04, 2022 [Video : Simple C2 Server by C#](https://www.youtube.com/watch?v=ulXfVrt8jX0)
 - Sep 10, 2022 [if you want to be "Pentester" or "Red-Teamer", at least YOU SHOULD know BASIC](https://www.linkedin.com/pulse/you-want-pentester-red-teamer-security-researcher-mohammadbagher)
 - Apr 25, 2022 [ETWPM2Monitor2.1 vs SysPM2Monitor2.7 & PoshC2 Server](https://github.com/DamonMohammadbagher/ETWProcessMon2/blob/main/ETWPM2Monitor2.1_vs_SysPM2Monitor2.7/README_20apr2022.md)
