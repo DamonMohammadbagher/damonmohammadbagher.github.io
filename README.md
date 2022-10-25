@@ -7,6 +7,7 @@
 [ [Linkedin Articles](https://www.linkedin.com/today/author/damonmohammadbagher), [Medium Posts ](https://medium.com/@DamonMohammadbagher)]
 
 ------------------------------------------------------------- 
+- Oct 24, 2022 [Video : Simple C2 Server by C# (Part 5)](https://www.linkedin.com/posts/damonmohammadbagher_video-simple-c2-server-by-c-part-5-uploading-activity-6990395579440803840-EK0x)
 - Oct 21, 2022 [Video : Simple C2 Server by C# (Part 4)](https://www.linkedin.com/posts/damonmohammadbagher_video-simple-c2-server-by-c-part-4-sending-activity-6988974020444438528-iIyB)
 - Oct 16, 2022 [Simple C2 Server & Injecting Commands to Pixels(steganography & Images)](https://www.linkedin.com/pulse/simple-c2-server-injecting-commands-pixels-bmp-files-mohammadbagher)
 - Oct 11, 2022 [Video : Simple C2 Server by C# (Part 3)](https://www.linkedin.com/posts/damonmohammadbagher_simple-c2-server-by-c-part-3-seatbelt-activity-6985655213864972288-rO0t)
