@@ -5,7 +5,6 @@
 )]
 - I will share my articles & posts + C# Codes here & 
 [ [Linkedin Articles](https://www.linkedin.com/today/author/damonmohammadbagher), [Medium Posts ](https://medium.com/@DamonMohammadbagher)]
-
 ------------------------------------------------------------- 
 
 - Oct 25, 2022 [Programming’s Greatest Mistakes](https://www.youtube.com/watch?v=YfKzJuXmZX8)
