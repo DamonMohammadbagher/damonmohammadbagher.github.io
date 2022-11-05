@@ -6,8 +6,6 @@
 - I will share my articles & posts + C# Codes here & 
 [ [Linkedin Articles](https://www.linkedin.com/today/author/damonmohammadbagher), [Medium Posts ](https://medium.com/@DamonMohammadbagher)]
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/hU3b7ikDMBY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
 ------------------------------------------------------------- 
 
 - Oct 25, 2022 [Programming’s Greatest Mistakes](https://www.youtube.com/watch?v=YfKzJuXmZX8)
