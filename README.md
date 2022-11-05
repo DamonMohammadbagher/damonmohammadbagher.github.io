@@ -10,7 +10,7 @@
 
 ------------------------------------------------------------- 
 
-- Oct 25, 2022 [Very Helpful talk for All also for Developers too](https://www.youtube.com/watch?v=YfKzJuXmZX8)
+- Oct 25, 2022 [Programming’s Greatest Mistakes](https://www.youtube.com/watch?v=YfKzJuXmZX8)
 
 [![](https://img.youtube.com/vi/YfKzJuXmZX8/1.jpg)](https://www.youtube.com/watch?v=YfKzJuXmZX8)
 - Oct 25, 2022 [Very Helpful talk for All also for Developers too](https://www.youtube.com/watch?v=sSee-aDjtmw)
