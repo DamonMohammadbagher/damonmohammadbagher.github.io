@@ -6,7 +6,16 @@
 - I will share my articles & posts + C# Codes here & 
 [ [Linkedin Articles](https://www.linkedin.com/today/author/damonmohammadbagher), [Medium Posts ](https://medium.com/@DamonMohammadbagher)]
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/hU3b7ikDMBY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 ------------------------------------------------------------- 
+
+- Oct 25, 2022 [Very Helpful talk for All also for Developers too](https://www.youtube.com/watch?v=YfKzJuXmZX8)
+
+[![](https://img.youtube.com/vi/YfKzJuXmZX8/1.jpg)](https://www.youtube.com/watch?v=YfKzJuXmZX8)
+- Oct 25, 2022 [Very Helpful talk for All also for Developers too](https://www.youtube.com/watch?v=sSee-aDjtmw)
+
+[![](https://img.youtube.com/vi/sSee-aDjtmw/1.jpg)](https://www.youtube.com/watch?v=sSee-aDjtmw)
 - Oct 24, 2022 [Video : Simple C2 Server by C# (Part 5)](https://www.linkedin.com/posts/damonmohammadbagher_video-simple-c2-server-by-c-part-5-uploading-activity-6990395579440803840-EK0x)
 - Oct 21, 2022 [Video : Simple C2 Server by C# (Part 4)](https://www.linkedin.com/posts/damonmohammadbagher_video-simple-c2-server-by-c-part-4-sending-activity-6988974020444438528-iIyB)
 - Oct 16, 2022 [Simple C2 Server & Injecting Commands to Pixels(steganography & Images)](https://www.linkedin.com/pulse/simple-c2-server-injecting-commands-pixels-bmp-files-mohammadbagher)
