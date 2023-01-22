@@ -7,6 +7,10 @@
 [ [Linkedin Articles](https://www.linkedin.com/today/author/damonmohammadbagher), [Medium Posts ](https://medium.com/@DamonMohammadbagher)]
 ------------------------------------------------------------- 
 
+
+- Jan 20, 2023 [2 Simple C# Techniques for Bypassing Anti-virus](/Posts/22Jan2023x.html)
+- Dec 17, 2022 [Simple Useful Method for Pentesters to learn new things](https://www.linkedin.com/pulse/simple-useful-method-pentesters-learn-new-things-damon-mohammadbagher?trk=public_post)
+- Nov 29, 2022 [Sending (Exfiltration) DATA via ARP Broadcast Traffic to all systems in (LAN) by “vid tag”](https://www.linkedin.com/pulse/sending-exfiltration-data-via-arp-roadcast-traffic-mohammadbagher?trk=article-ssr-frontend-pulse_more-articles_related-content-card)
 - Oct 25, 2022 [Programming’s Greatest Mistakes](https://www.youtube.com/watch?v=YfKzJuXmZX8)
 
 [![](https://img.youtube.com/vi/YfKzJuXmZX8/1.jpg)](https://www.youtube.com/watch?v=YfKzJuXmZX8)
