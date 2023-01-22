@@ -52,7 +52,7 @@ mso-font-kerning:18.0pt">2 Simple C# Techniques for Bypassing Anti-virus</span><
 <p>&nbsp;</p>
 <p>as you can see Thread in C# stared via "ThreadStart" also in this time our __Assembly Created in this Thread and via Delegation Technique, that Thread "_t.started()" started by "DynamicInvoke()" and inside C# Thread Shell Code or Assembly code was injected into Memory to run in-memory at the same time so this code is kind of CreateThread() API Function etc but we do not need to call that in C# source code Directly. but via API Monitor tool v2 you see what exactly happened in background for this code.</p>
  <p><b>"NativePayload_PE1" steps:</b></p><p>&nbsp;</p><p> in the first step you can see in memory we have RWX Protection via "VirtualAlloc()"</p>
- <p><img src="22Jan2023x_files/_x1.png" width="1366" height="768" border="0"></p>
+ <p><img src="22Jan2023x_files/xx1.png" width="1366" height="768" border="0"></p>
 <p>Picture 1: step1</p>
 <p></p>
 <p>his RWX is default so probably all Anti-viruses will check this Part of Memory as Red-flag WHEN they see something abnormal in process events or ...</p>
@@ -89,13 +89,13 @@ mso-font-kerning:18.0pt">2 Simple C# Techniques for Bypassing Anti-virus</span><
 
 <p>in the next step you can see we have session via cobaltstrike x64 payload (reverse tcp 443)</p>
 
- <p><img src="22Jan2023x_files/_x2.png" width="1366" height="768" border="0"></p>
+ <p><img src="22Jan2023x_files/xx2.png" width="1366" height="768" border="0"></p>
 <p>Picture 2: step4 RWX to X</p>
 <p>&nbsp;</p>
 <p>but in this first code i have another step to change Protection from X to RX but in this time again you need to use Delay, because this probably will catch by some AVs as abnormal behavior [don't changed Protection from X to RX very fast] so via delay you can bypass this one but remember this one first protection was RWX and was changed to X very fast in this time you should change Protection very fast before checking by AV but last step for Changing from X to RX we need at least 2 mins Delay so your Antivirus probably after 2 mins will not check that Part of Memory which Was X and now changed to RX but this is not same for all AVs you should check one by one ;p"
 </p><p>in the next step you can see after 2 min X was Changed to RX but we had Session in Previous step when our protection was X.</p>
 <p></p>
-<p><img src="22Jan2023x_files/_x3.png" width="1366" height="768" border="0"></p>
+<p><img src="22Jan2023x_files/xx3.png" width="1366" height="768" border="0"></p>
 <p>Picture 3: step5 X to RX </p>
 <p>&nbsp;</p>
 
@@ -154,7 +154,7 @@ mso-font-kerning:18.0pt">2 Simple C# Techniques for Bypassing Anti-virus</span><
 <p>but before Compiling/Run in Memory first you should change Protection memory to RWX via <b>VirtualProtectEx</b> THEN after Delay you can Run in Memory that part of Memory which has <b>RWX</b> protection and Very fast again via <b>VirtualProtectEx</b> you should Change Protection From RWX to <b>X</b> only and Done.</p>
 <p>so this code is simpler than first code.</p>
            
-<p><img src="22Jan2023x_files/_x4.png" width="1284" height="691" border="0"></p>
+<p><img src="22Jan2023x_files/xx4.png" width="1284" height="691" border="0"></p>
 <p>Picture 4: RWX to X only</p>
 <p>&nbsp;</p>
 
@@ -163,7 +163,7 @@ mso-font-kerning:18.0pt">2 Simple C# Techniques for Bypassing Anti-virus</span><
 so again after run in memory you should very fast change RWX to X <b>(before checking by AV)</b> and Done.
 
 in the next picture i want talk about "ETWPM2Monitor2.1" ETW tool which made by me for Blue-Teamers for Process Injection Detection / Remote Thread Injection Detection, as you can see this Second Code was Detected by my tool very well also Detected by Memory Scanner "Pe-sieve" too.</p>
- <p><img src="22Jan2023x_files/_x5.png" width="1366" height="766" border="0"></p>
+ <p><img src="22Jan2023x_files/xx5.png" width="1366" height="766" border="0"></p>
 <p>Picture 5: ETW and ETWProcessMon2 + ETWPM2Monitor2.1 tools</p>
 
 <p><b>Note:</b> all codes are here <a target="_blank" href="https://github.com/damonmohammadbagher/NativePayload_PE1">https://github.com/damonmohammadbagher/NativePayload_PE1</a></p>
