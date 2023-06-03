@@ -1,0 +1,7 @@
+bridge Between Physical Machine to Virtual Machine by simple Script "NativePayload_ARP2.sh" (ver2) ;) , sending ARP broadcast (using vid tag and Ping) to 2 systems via physical Machine and Bingo .... my test on VMs was good..
+video : https://lnkd.in/dTC5FwF
+i will publish article for this soon but you can find all Pictures here : https://lnkd.in/dA8ZAXv
+
+
+
+https://www.linkedin.com/feed/update/urn:li:activity:6467727366499110912

@@ -1,0 +1,9 @@
+This Method is not New ;)  but i made these "New" scripts for my Ebook and you can read my Old Article about this method here: 
+"Transferring Backdoor Payloads with BSSID by Wireless Traffic", 
+Peerlyst link : https://lnkd.in/etGSiU6
+but in these Scripts i used Bash Script on Linux (Linux only) some People told me why you have not something like these C# Codes on Linux , honestly i am not "Pro" with "Bash Script" programming but i made these scripts for this article , Very simple and fast . i will make new Article about these New Codes soon via "Peerlyst.com" and for understanding this method you should read that old Link i mentioned via Peerlyst.com
+Full Article : https://lnkd.in/dBRc8AS
+
+
+
+https://www.linkedin.com/feed/update/urn:li:activity:6394292820991111168

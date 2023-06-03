@@ -1,0 +1,5 @@
+sometimes Http is fun ;) , (with/without "Error" Client/Server side) you can use web traffic for Exfiltration with very Useful/simple ways:
+
+
+
+https://www.linkedin.com/feed/update/urn:li:activity:6474779373357584384

@@ -1,0 +1,4 @@
+ETWMonThread.cs , Simple C# Source Code with ETW Sample for Detecting Injected Meterpreter Payloads via Thread Injection Method (only)...
+Source : https://lnkd.in/djK-zQu
+
+https://www.linkedin.com/feed/update/urn:li:activity:6354537039311958016

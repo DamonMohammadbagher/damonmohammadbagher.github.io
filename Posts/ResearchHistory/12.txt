@@ -1,0 +1,2 @@
+code for exfiltration/uploading DATA to DNS server by PTR request is ready , i will publish this Code in github by new Code soon ;). with "exf" switch you can send these Data to DNS Server with "Random Time" and with Reading DNS Log file you can get these Data very simple . Article and Code Published : https://lnkd.in/d8GftsW
+

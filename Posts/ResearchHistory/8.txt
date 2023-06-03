@@ -1,0 +1,2 @@
+"Payload hiding Method via Infecting Target Process Memory"
+this is POC for Dumping Payloads from Target Process Memory Runtime/Executing and Getting Meterpreter Session ! in this case an attacker will infect your Target Process ONLY by REM command in cmd.exe or Creating Variables in Powershell.exe (Target Processes) Then these Target Process are kind of Temporary location for your Malware Payloads ;) so this backdoor very simple will dump these bytes from Target Process Memory Directly. finally BINGO!

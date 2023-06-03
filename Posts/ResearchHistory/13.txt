@@ -1,0 +1,4 @@
+Dnsmasq log reader tool for dumping Exfiltrated Data by PTR Records now is ready i will publish article about this in this week also i will explain these C# codes too . as you can see these green text are Exfiltrated DATA behind these DNS logs for PTR Records , Article and Code Published : https://lnkd.in/d8GftsW
+
+
+https://www.linkedin.com/feed/update/urn:li:activity:6326957568291799040/?updateEntityUrn=urn%3Ali%3Afs_feedUpdate%3A%28V2%2Curn%3Ali%3Aactivity%3A6326957568291799040%29

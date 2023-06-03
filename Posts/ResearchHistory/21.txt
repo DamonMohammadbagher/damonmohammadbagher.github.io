@@ -1,0 +1,4 @@
+Injecting C# Backdoor To Native Process (AVs bypassing)
+
+
+https://www.linkedin.com/feed/update/urn:li:activity:6407703773967380480

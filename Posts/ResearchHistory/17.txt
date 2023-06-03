@@ -1,0 +1,6 @@
+Exfiltration and Transferring DATA via "ARP" Traffic (linux) , it was fun .... ;-) , "Exfiltration meaning : how you can Upload/Download DATA from one system to another systems via ARP Traffic" , it is not talk about how you can Transfer DATA from LAN to WAN "Exfiltration" , at least in my opinion in this picture.
+
+https://lnkd.in/eKj2SNP
+
+
+https://www.linkedin.com/feed/update/urn:li:activity:6388874344055001088

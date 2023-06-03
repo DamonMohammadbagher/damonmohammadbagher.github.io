@@ -1,0 +1,4 @@
+Windows Defender with last update Bypassed by "Remote Thread Injection Method" very simple , i used (old code) "NativePayload_Tinjection" to do this and BINGO , it works .... "Defender is still Useless"
+
+
+https://www.linkedin.com/feed/update/urn:li:activity:6443202381952872448
