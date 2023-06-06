@@ -1,8 +1,0 @@
-Injecting C# Backdoor To Native Process , "comodo AV v10" bypassed .
-step1: converted C# Backdoor + Meterpreter Payload to Base64.
-step2: injecting base64 code and Agent code to "cmd:1316" Process Memory.
-step3: read "cmd:1316" Memory and Compiled Base64 code "in-memory" by Agent.
-step4: "Bingo" Meterpreter session ;) 
-
-
-https://www.linkedin.com/feed/update/urn:li:activity:6412119215028912128

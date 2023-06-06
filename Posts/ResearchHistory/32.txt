@@ -1,3 +1,0 @@
- will publish NativePayload_BSSID v2 , in this version i will publish something "New" , in this case we can send Exfiltration Text/Data via DeAuthentication Packets from Client to server on AIR without User-pass & without Wifi Connection very simple and very fast...
- 
- https://www.linkedin.com/feed/update/urn:li:activity:6517174296798855168

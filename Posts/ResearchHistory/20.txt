@@ -1,6 +1,0 @@
-after NativePayload_ICMP.exe by C# now i am working on simple shell script called "NativePayload_ICMP.sh" (test version) ,
-you can find this script with "step by step" Pictures here : https://lnkd.in/emrucRi
-Article : https://lnkd.in/dHT6bHH
-
-
-https://www.linkedin.com/feed/update/urn:li:activity:6400011332829081600

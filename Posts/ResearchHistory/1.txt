@@ -1,1 +1,0 @@
-Meterpreter_Payload_Detection.exe v1.06 (Test version) , Checking Memory Realtime by Monitoring Threads (ETW) and Detecting Meterpreter Payloads ;-) , time to Fix bugs and Using New Signatures for (Empire).

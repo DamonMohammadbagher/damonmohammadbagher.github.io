@@ -1,3 +1,0 @@
-"NativePayload_BSSID.sh" v2 , is ready ,(Exfiltration Text/Data via DeAuthentication Packets) is "New" feature in this version II , i will publish article for this method soon. Code Published. link : https://lnkd.in/dgb4kGf
-
-https://www.linkedin.com/feed/update/urn:li:activity:6519633848748240896

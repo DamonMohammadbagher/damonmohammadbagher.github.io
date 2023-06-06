@@ -1,3 +1,0 @@
-Meterpreter ReverseTcp x64 Payloads via image Pixels ;D,
-Article: https://lnkd.in/gJdRgZT
-i had a lot bug for this , finally i made this i hope fixing these bugs very soon ;) , i know idea for transferring payloads by Images is not new but i want to check this one with AVS by my techniques .... , i will try to fix bad bugs for my code then i will publish source code ......

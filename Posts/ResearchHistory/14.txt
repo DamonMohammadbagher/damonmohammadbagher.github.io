@@ -1,6 +1,0 @@
-Exfil and Uploading DATA via IPv6 AAAA records Request to Fake DNS server or Udp Port 53 Listener ;) after IPv4 now IPv6 ...
-C# code published and i will make article for this : https://lnkd.in/e5x2mCR
-Video : https://lnkd.in/dZz8j4w
-
-
-https://www.linkedin.com/feed/update/urn:li:activity:6339996691781025792
