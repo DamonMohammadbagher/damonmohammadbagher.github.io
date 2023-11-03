@@ -10,6 +10,8 @@
 ------------------------------------------------------------- 
 
 
+- Nov 03, 2023 [Table of Contents for eBook Bypassing AntiViruses by C# Programming v2.0](/Posts/ebookv2/TOC.htm)
+- Nov 03, 2023 [Table of Contents Farsi for eBook Bypassing AntiViruses by C# Programming v2.0 (Persian Edition)](/Posts/ebookv2/TOC_FA.htm)
 - Jan 20, 2023 [2 Simple C# Techniques for Bypassing Anti-virus](/Posts/22Jan2023x.html)
 - Dec 17, 2022 [Simple Useful Method for Pentesters to learn new things](https://www.linkedin.com/pulse/simple-useful-method-pentesters-learn-new-things-damon-mohammadbagher?trk=public_post)
 - Nov 29, 2022 [Sending (Exfiltration) DATA via ARP Broadcast Traffic to all systems in (LAN) by “vid tag”](https://www.linkedin.com/pulse/sending-exfiltration-data-via-arp-roadcast-traffic-mohammadbagher?trk=article-ssr-frontend-pulse_more-articles_related-content-card)
