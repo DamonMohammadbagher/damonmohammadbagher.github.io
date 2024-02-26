@@ -9,7 +9,7 @@
 
 ------------------------------------------------------------- 
 
-
+- Feb 26, 2024 [Ebook chapter 4.3: Chunking CobaltStrike Payloads + Jump Method](/Posts/26feb2024x.html)
 - Nov 03, 2023 [Table of Contents for eBook Bypassing AntiViruses by C# Programming v2.0](/Posts/ebookv2/TOC.htm)
 - Nov 03, 2023 [Table of Contents Farsi for eBook Bypassing AntiViruses by C# Programming v2.0 (Persian Edition)](/Posts/ebookv2/TOC_FA.htm)
 - Jan 20, 2023 [2 Simple C# Techniques for Bypassing Anti-virus](/Posts/22Jan2023x.html)
